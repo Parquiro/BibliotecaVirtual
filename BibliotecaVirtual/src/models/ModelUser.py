@@ -38,7 +38,8 @@ class ModelUser():
     def register_user(self, db, user):
         try:
             conn = db.connection
-            id = "coalcase(select max(usuario.id) from usuario, 0) + 1"
+            #id = "coalcase(select max(usuario.id) from usuario, 0) + 1"
+            id = None
             dni = user.dni
             name = user.name
             lastname = user.lastname
