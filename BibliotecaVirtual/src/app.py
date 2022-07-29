@@ -63,7 +63,7 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/adminHome')
-@login_required
+#@login_required
 def adminHome():
     return render_template('admin/adminHome.html')
 
