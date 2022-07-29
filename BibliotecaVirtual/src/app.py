@@ -40,9 +40,7 @@ def registro():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # print(request.form['username'])
-        # print(request.form['password'])
-        user = User(0, 0, "", "", request.form['username'], request.form['password'], 0)
+        user = User(None, None, None, None, request.form['username'], request.form['password'], None)
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
             if logged_user.password:
@@ -70,7 +68,13 @@ def adminHome():
 @app.route('/student', methods=['GET', 'POST'])
 #@login_required
 def student():
-    return render_template('admin/student.html')
+    if request.method == 'POST':
+        user = User(None, request.form['dni'], request.form['name'], request.form['lastname'],
+        request.form['username'], request.form['password'], request.form['phone'])
+        ModelUser.register_user(db, user)
+    else: 
+        return render_template('admin/student.html')
+    return redirect(url_for('student'))
 
 def status_401(error):
     return redirect(url_for('login'))

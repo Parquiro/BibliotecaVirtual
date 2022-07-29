@@ -12,7 +12,7 @@
 <div class="container-fluid"  style="margin: 50px 0;">
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-3">
-            <img src="assets/img/user03.png" alt="user" class="img-responsive center-box" style="max-width: 110px;">
+            <img src="{{ url_for('static', filename='assets/img/user03.png') }}" alt="user" class="img-responsive center-box" style="max-width: 110px;">
         </div>
         <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
             Bienvenido a la sección para registrar nuevos estudiantes, para poder registrar un estudiante deberás de llenar todos los campos del siguiente formulario
@@ -32,52 +32,48 @@
 <div class="container-fluid">
     <div class="container-flat-form">
         <div class="title-flat-form title-flat-blue">Registrar un nuevo estudiante</div>
-        <form autocomplete="off">
+
+        <form action="/student" method="POST" autocomplete="off" >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="row">
                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                    
                    <div class="group-material-double">
                         <div class="group-material">
-                            <input type="text" class="material-control tooltips-general" placeholder="Nombre" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del Estudiante">
+                            <input type="text" class="material-control tooltips-general" name="name" placeholder="Nombre" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del Estudiante">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Nombre</label>
                         </div>
                         <div class="group-material">
-                            <input type="text" class="material-control tooltips-general" placeholder="Apellido" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip" data-placement="top" title="Escribe el Apellido del Estudiante">
+                            <input type="text" class="material-control tooltips-general" name="lastname" placeholder="Apellido" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip" data-placement="top" title="Escribe el Apellido del Estudiante">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Apellido</label>
                         </div>
                    </div>
                     <div class="group-material">
-                        <input type="email" class="material-control tooltips-general" placeholder="E-mail"  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el Email del Estudiante">
+                        <input type="email" class="material-control tooltips-general" name="username" placeholder="E-mail" required=""  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el Email del Estudiante">
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Email</label>
                     </div>
                     <div class="group-material-double">
                         <div class="group-material">
-                            <input type="number" class="material-control tooltips-general" placeholder="Dni" required="" maxlength="8" pattern="[0-9]{1,8}" data-toggle="tooltip" data-placement="top" title="Escribe el Dni del Estudiante">
+                            <input type="number" class="material-control tooltips-general" name="dni" placeholder="Dni" required="" maxlength="8" pattern="[0-9]{1,8}" data-toggle="tooltip" data-placement="top" title="Escribe el Dni del Estudiante">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Dni</label>
                         </div>
                         <div class="group-material">
-                            <input type="number" class="material-control tooltips-general" placeholder="Telefono" required="" maxlength="11" pattern="[0-9]{1,11}" data-toggle="tooltip" data-placement="top" title="Escribe el Telefono del Estudiante">
+                            <input type="number" class="material-control tooltips-general" name="phone" placeholder="Telefono" required="" maxlength="11" pattern="[0-9]{1,11}" data-toggle="tooltip" data-placement="top" title="Escribe el Telefono del Estudiante">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Telefono</label>
                         </div>
                    </div>
-                   <div class="group-material">
-                    <input type="textarea" class="material-control tooltips-general" placeholder="Direccion" required="" maxlength="50" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" data-toggle="tooltip" data-placement="top" title="Escribe el Direccion del Estudiante">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Direccion</label>
-                </div>
                     <div class="group-material">
-                        <input type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                        <input type="password" class="material-control tooltips-general" name="password" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Contraseña</label>
