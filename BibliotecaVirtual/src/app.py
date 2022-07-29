@@ -68,7 +68,7 @@ def adminHome():
     return render_template('admin/adminHome.html')
 
 @app.route('/student', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def student():
     return render_template('admin/student.html')
 
