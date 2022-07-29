@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, request, flash, url_for
 from flask_mysqldb import MySQL
 
 from config import config
-
+#Comentario
 
 app = Flask(__name__)
 
