@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="Shortcut Icon" type="image/x-icon" href="{ url_for('static', filename='assets/icons/icono.png') }" />
+    <script src="{{ url_for('static', filename='js/sweet-alert.min.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sweet-alert.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/material-design-iconic-font.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.mCustomScrollbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/jquery-1.11.2.min.js') }}"><\/script>')</script>
+    <script src="{{ url_for('static', filename='js/modernizr.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</head>
+
+<body class="full-cover-background" style="background-image:url({{ url_for('static', filename='assets/img/font-login.jpg') }});">
+
+    <div class="form-container">
+
+        <p class="text-center" style="margin-top: 17px;">
+
+            <img src="{{ url_for('static', filename='assets/img/digitalLibrary-logo.png') }}" width="100" height="70">
+        </p>
+        <h4 class="text-center all-tittles" style="margin-bottom: 15px;">Bienvenido a Biblioteca Virtual</h4>
+        <h4 class="text-center all-tittles" style="margin-bottom: 30px;">{% block subtitle %}{% endblock %}</h4>
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="text-center" role="alert">
+            <strong>{{ message }}</strong>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+
+       {% block body %}
+       {% endblock %} 
+
+</body>
+</html>
