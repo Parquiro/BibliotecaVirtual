@@ -1,0 +1,65 @@
+{% extends 'loginLayout.html' %}
+
+{% block title %} Registro {% endblock %}
+{% block subtitle %} Registro{% endblock %}
+
+{% block body %}
+
+<form action="/registro" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="group-material-login-double">
+        <div class="group-material-login">
+          <input type="text" class="material-login-control" name="name" required="" maxlength="15">
+          <span class="highlight-login"></span>
+          <span class="bar-login"></span>
+          <label><i class="zmdi zmdi-account"></i> &nbsp; Nombre</label>
+        </div>
+
+        <div class="group-material-login">
+          <input type="text" class="material-login-control" name="lastname" required="" maxlength="15">
+          <span class="highlight-login"></span>
+          <span class="bar-login"></span>
+          <label><i class="zmdi zmdi-account"></i> &nbsp; Apellido</label>
+        </div>
+
+      </div><br>
+
+      <div class="group-material-login">
+        <input type="email" class="material-login-control" name="username" required="" maxlength="30">
+        <span class="highlight-login"></span>
+        <span class="bar-login"></span>
+        <label><i class="zmdi zmdi-account"></i> &nbsp; Email</label>
+      </div><br>
+
+      <div class="group-material-login-double">
+
+        <div class="group-material-login">
+          <input type="number" class="material-login-control" name="dni" required="" maxlength="8">
+          <span class="highlight-login"></span>
+          <span class="bar-login"></span>
+          <label><i class="zmdi zmdi-account"></i> &nbsp; Dni</label>
+        </div>
+
+        <div class="group-material-login">
+          <input type="number" class="material-login-control" name="phone" required="" maxlength="15">
+          <span class="highlight-login"></span>
+          <span class="bar-login"></span>
+          <label><i class="zmdi zmdi-account"></i> &nbsp; Telefono</label>
+        </div>
+      </div><br>
+
+      <div class="group-material-login">
+        <input type="password" class="material-login-control" name="password" required="" maxlength="16">
+        <span class="highlight-login"></span>
+        <span class="bar-login"></span>
+        <label><i class="zmdi zmdi-account"></i> &nbsp; Contraseña</label>
+      </div><br>
+
+      <button class="btn-login" type="submit">Registrarse &nbsp; <i class="zmdi zmdi-arrow-right"></i></button>
+    </form>
+      <a href="/">
+      <button class="btn-login2" type="submit"><i class="zmdi zmdi-arrow-left"></i> &nbsp; Atras </button>
+    </a>
+</div>
+
+{% endblock %}
