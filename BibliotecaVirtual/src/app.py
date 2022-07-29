@@ -67,6 +67,11 @@ def logout():
 def adminHome():
     return render_template('admin/adminHome.html')
 
+@app.route('/student', methods=['GET', 'POST'])
+@login_required
+def student():
+    return render_template('admin/student.html')
+
 def status_401(error):
     return redirect(url_for('login'))
 
