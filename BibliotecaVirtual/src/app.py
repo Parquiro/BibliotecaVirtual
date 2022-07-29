@@ -82,6 +82,24 @@ def Categorias():
 def catalogo():
     return render_template('catalog.html')
 
+@app.route('/Usuario')
+def usuario():
+    return render_template('student.html')
+
+@app.route('/Libros')
+def estudiantes():
+    return render_template('book.html')
+
+@app.route('/listaCategorias')
+def listaCategoria():
+    return render_template('listcategory.html')
+
+@app.route('/listaEstudiantes')
+def listaEstudiantes():
+    return render_template('liststudent')
+
+
+
 
 if __name__=='__main__':
     app.config.from_object(config['development'])
