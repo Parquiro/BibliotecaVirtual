@@ -51,3 +51,14 @@ class ModelUser():
             conn.commit()
         except Exception as ex:
             raise Exception(ex)
+    
+    @classmethod
+    def list_users(self, db):
+        cur = db.connection.cursor()
+        sql = """SELECT Usu_Id, Usu_Nombre, Usu_Apellido, Usu_Dni, Usu_Email, Usu_Telefono
+        FROM usuario"""
+        cur.execute(sql)
+        data = cur.fetchall()
+        return data
+        
+

@@ -24,7 +24,7 @@
         <div class="col-xs-12 lead">
             <ol class="breadcrumb">
               <li class="active">Nuevo estudiante</li>
-              <li><a href="liststudent.html">Listado de estudiantes</a></li>
+              <li><a href="/liststudent">Listado de estudiantes</a></li>
             </ol>
         </div>
     </div>
@@ -32,7 +32,15 @@
 <div class="container-fluid">
     <div class="container-flat-form">
         <div class="title-flat-form title-flat-blue">Registrar un nuevo estudiante</div>
-
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="text-center" style="margin-bottom: 30px;" role="alert">
+            <strong>--- {{ message }} ---</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         <form action="/student" method="POST" autocomplete="off" >
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="row">

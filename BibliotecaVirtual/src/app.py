@@ -12,6 +12,7 @@ from models.ModelUser import ModelUser
 from models.entities.User import User
 
 app = Flask(__name__)
+app.secret_key = 'mySecretKey'
 
 csrf = CSRFProtect()
 db = MySQL(app)
@@ -28,11 +29,10 @@ def index():
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
-        print(request.form['username'])
-        print(request.form['password'])
         user = User(None, request.form['dni'], request.form['name'], request.form['lastname'],
         request.form['username'], request.form['password'], request.form['phone'])
         ModelUser.register_user(db, user)
+        flash('Usuario registrado satisfactoriamente')
     else: 
         return render_template('auth/registro.html')
     return redirect(url_for('login'))
@@ -72,9 +72,16 @@ def student():
         user = User(None, request.form['dni'], request.form['name'], request.form['lastname'],
         request.form['username'], request.form['password'], request.form['phone'])
         ModelUser.register_user(db, user)
+        flash('Usuario registrado satisfactoriamente')
     else: 
         return render_template('admin/student.html')
     return redirect(url_for('student'))
+
+@app.route('/liststudent', methods=['GET', 'POST'])
+#@login_required
+def liststudent():
+    data = ModelUser.list_users(db)
+    return render_template('admin/liststudents.html', users = data)
 
 def status_401(error):
     return redirect(url_for('login'))
