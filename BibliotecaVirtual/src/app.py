@@ -63,7 +63,8 @@ def logout():
 @app.route('/adminHome')
 #@login_required
 def adminHome():
-    return render_template('admin/adminHome.html')
+    data = ModelUser.count_users(db)
+    return render_template('admin/adminHome.html', countUsers = data)
 
 @app.route('/registerUser', methods=['GET', 'POST'])
 #@login_required
@@ -90,15 +91,13 @@ def editUser(id):
     user = ModelUser.list_users(db)
     return render_template('admin/editUser.html', userEdit = data, users = user)
 
-@classmethod
 @app.route('/updateUser/<string:id>', methods = ['POST'])
 def updateUser(id):
-    if request.method == 'POST':
-        userUpdate = User(None, request.form['dni'], request.form['name'], request.form['lastname'],
-        request.form['username'], 0, request.form['phone'])
-        ModelUser.update_user(db, id, userUpdate)
-        flash('Usuario actualizado correctamente')
-        return redirect(url_for('userList'))
+    userUpdate = User(id, request.form['dni'], request.form['name'], request.form['lastname'],
+    request.form['username'], 0, request.form['phone'])
+    ModelUser.update_user(db, id, userUpdate)
+    flash('Usuario actualizado correctamente')
+    return redirect(url_for('userList'))
 
 
 @app.route('/deleteUser/<string:id>', methods=['GET', 'POST'])

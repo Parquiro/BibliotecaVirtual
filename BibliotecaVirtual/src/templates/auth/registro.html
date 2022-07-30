@@ -34,14 +34,14 @@
       <div class="group-material-login-double">
 
         <div class="group-material-login">
-          <input type="number" class="material-login-control" name="dni" required="" maxlength="8">
+          <input type="number" class="material-login-control" name="dni" pattern="^[0-9]+" min="0" required="" maxlength="8">
           <span class="highlight-login"></span>
           <span class="bar-login"></span>
           <label><i class="zmdi zmdi-account"></i> &nbsp; Dni</label>
         </div>
 
         <div class="group-material-login">
-          <input type="number" class="material-login-control" name="phone" required="" maxlength="15">
+          <input type="number" class="material-login-control" name="phone" pattern="^[0-9]+" min="0" required="" maxlength="15">
           <span class="highlight-login"></span>
           <span class="bar-login"></span>
           <label><i class="zmdi zmdi-account"></i> &nbsp; Telefono</label>

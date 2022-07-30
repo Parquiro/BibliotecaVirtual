@@ -84,14 +84,27 @@ class ModelUser():
         lastname = user.lastname
         username = user.username
         phone = user.phone
+        print(dni, name, lastname, username, phone)
         conn = db.connection
         cur = conn.cursor()
-        sql = """UPDATE usuarios 
-        SET Usu_Dni = %s, Usu_Nombre = %s, Usu_Apellido = %s,
-        Usu_Email = %s, Usu_Telefono = %s
-        WHERE Usu_Id = %s""", (dni, name, lastname, username, phone, id)
+        cur.execute("""
+        UPDATE usuario
+        SET Usu_Dni = %s,
+            Usu_Nombre = %s,
+            Usu_Apellido = %s,
+            Usu_Email = %s, 
+            Usu_Telefono = %s
+        WHERE Usu_Id = %s """, (dni, name, lastname, username, phone, id))
         conn.commit()
 
+    @classmethod
+    def count_users(self, db):
+        cur = db.connection.cursor()
+        sql = """SELECT COUNT(*) AS 'cantidad de usuarios'
+        FROM usuario"""
+        cur.execute(sql)
+        data = cur.fetchone()
+        return data
         
         
 

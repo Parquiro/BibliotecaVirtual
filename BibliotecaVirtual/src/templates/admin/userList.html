@@ -73,7 +73,7 @@
                         <a href="/editUser/{{user.0}}" class="btn btn-success"><i class="zmdi zmdi-refresh"></i></a>
                     </td>
                     <td class="div-table-cell" style="width: 9%;">
-                        <a href="/deleteUser/{{user.0}}" class="btn btn-danger"><i class="zmdi zmdi-delete"></i></a>
+                        <a data-href="/deleteUser/{{user.0}}" data-placement="bottom" class="btn btn-danger delete-user-button"><i class="zmdi zmdi-delete"></i></a>
                     </td>
                 </tr>
                 {% endfor %}

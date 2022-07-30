@@ -25,7 +25,7 @@
         </div>
     </div>
 </div>
-<form action="/updateUser/{{user.0}}" method="POST" autocomplete="off" >
+<form action="/updateUser/{{userEdit.0}}" method="POST" autocomplete="off" >
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="row">
     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -52,13 +52,13 @@
             </div>
             <div class="group-material-double">
                 <div class="group-material">
-                    <input type="number" class="material-control tooltips-general" name="dni" value="{{ userEdit.1 }}"  required="" maxlength="8" pattern="[0-9]{1,8}" data-toggle="tooltip" data-placement="top" title="Escribe el Dni del Estudiante">
+                    <input type="number" class="material-control tooltips-general" name="dni" value="{{ userEdit.1 }}"  required="" maxlength="8" pattern="^[0-9]+" min="0" data-toggle="tooltip" data-placement="top" title="Escribe el Dni del Estudiante">
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Dni</label>
                 </div>
                 <div class="group-material">
-                    <input type="number" class="material-control tooltips-general" name="phone" value="{{ userEdit.5 }}" required="" maxlength="11" pattern="[0-9]{1,11}" data-toggle="tooltip" data-placement="top" title="Escribe el Telefono del Estudiante">
+                    <input type="number" class="material-control tooltips-general" name="phone" value="{{ userEdit.5 }}" required="" maxlength="11" pattern="^[0-9]+" min="0" data-toggle="tooltip" data-placement="top" title="Escribe el Telefono del Estudiante">
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Telefono</label>
@@ -119,7 +119,7 @@
                         <a href="/editUser/{{user.0}}" class="btn btn-success"><i class="zmdi zmdi-refresh"></i></a>
                     </td>
                     <td class="div-table-cell" style="width: 9%;">
-                        <a href="/deleteUser/{{user.0}}" class="btn btn-danger"><i class="zmdi zmdi-delete"></i></a>
+                        <a data-href="/deleteUser/{{user.0}}" data-placement="bottom" class="btn btn-danger delete-user-button"><i class="zmdi zmdi-delete"></i></a>
                     </td>
                 </tr>
                 {% endfor %}
