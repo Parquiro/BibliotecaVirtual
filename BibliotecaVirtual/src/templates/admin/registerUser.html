@@ -46,42 +46,53 @@
             <div class="row">
                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                    
-                   <div class="group-material-double">
-                        <div class="group-material">
-                            <input type="text" class="material-control tooltips-general" name="name" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del Estudiante">
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Nombre</label>
-                        </div>
-                        <div class="group-material">
-                            <input type="text" class="material-control tooltips-general" name="lastname" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip" data-placement="top" title="Escribe el Apellido del Estudiante">
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Apellido</label>
-                        </div>
-                   </div>
+                <div class="group-material-double">
+                
                     <div class="group-material">
-                        <input type="email" class="material-control tooltips-general" name="username" required=""  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el Email del Estudiante">
+                        <input type="text" class="material-control tooltips-general" name="name"
+                            required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip"
+                            data-placement="top" title="Escribe el nombre del usuario" placeholder="Escribe aquí el nombre del usuario" > 
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Email</label>
+                        <label>Nombre</label>
                     </div>
-                    <div class="group-material-double">
-                        <div class="group-material">
-                            <input type="number" class="material-control tooltips-general" name="dni"  required="" maxlength="8" pattern="^[0-9]+" min="0" data-toggle="tooltip" data-placement="top" title="Escribe el Dni del Estudiante">
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Dni</label>
-                        </div>
-                        <div class="group-material">
-                            <input type="number" class="material-control tooltips-general" name="phone" required="" maxlength="11" pattern="^[0-9]+" min="0" data-toggle="tooltip" data-placement="top" title="Escribe el Telefono del Estudiante">
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Telefono</label>
-                        </div>
-                   </div>
                     <div class="group-material">
-                        <input type="password" class="material-control tooltips-general" name="password" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                        <input type="text" class="material-control tooltips-general" name="lastname" placeholder="Escribe aquí el apellido del usuario" 
+                            required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}"
+                            data-toggle="tooltip" data-placement="top" title="Escribe el Apellido del Estudiante">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Apellido</label>
+                    </div>
+                </div>
+                <div class="group-material">
+                    <input type="email" class="material-control tooltips-general" name="username"
+                        required="" maxlength="50" data-toggle="tooltip" data-placement="top" placeholder="Escribe aquí el email del usuario" 
+                        title="Escribe el Email del Estudiante">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Email</label>
+                </div>
+                <div class="group-material-double">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí el dni del usuario" 
+                        pattern="^[0-9]{1,8}" required="" maxlength="8" data-toggle="tooltip" data-placement="top" 
+                        title="Solamente 8 números" name="dni"">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Dni</label>
+                    </div>
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí el telefono del usuario" 
+                            required="" maxlength="15" pattern="[0-9]{1,15}" data-toggle="tooltip" data-placement="top"
+                            title="Escribe el Telefono del usuario" name="phone"">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Telefono</label>
+                    </div>
+                </div>
+                    <div class="group-material">
+                        <input type="password" class="material-control tooltips-general" name="password" required="" maxlength="16" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Contraseña</label>

@@ -84,6 +84,13 @@ def userList():
     data = ModelUser.list_users(db)
     return render_template('admin/userList.html', users = data)
 
+@app.route('/searchUsers', methods=['GET', 'POST'])
+def searchUsers():
+    searchCondition = request.form['searchCondition']
+    data = ModelUser.search_user(db, searchCondition)
+    return render_template('admin/userList.html', users = data)
+
+
 @app.route('/editUser/<string:id>')
 #@login_required
 def editUser(id):

@@ -84,7 +84,6 @@ class ModelUser():
         lastname = user.lastname
         username = user.username
         phone = user.phone
-        print(dni, name, lastname, username, phone)
         conn = db.connection
         cur = conn.cursor()
         cur.execute("""
@@ -104,6 +103,20 @@ class ModelUser():
         FROM usuario"""
         cur.execute(sql)
         data = cur.fetchone()
+        return data
+    
+    @classmethod
+    def search_user(sef, db, searchUserCondition):
+        searchCondition = "%"+ searchUserCondition + "%"
+        cur = db.connection.cursor()
+        cur.execute("""
+        SELECT Usu_Id, Usu_Nombre, Usu_Apellido, Usu_Dni, Usu_Email, Usu_Telefono
+        FROM usuario
+        WHERE Usu_Nombre like %s
+            or Usu_Apellido like %s
+            or Usu_Dni like %s
+            or Usu_Telefono like %s """, (searchCondition, searchCondition, searchCondition,searchCondition))
+        data = cur.fetchall()
         return data
         
         

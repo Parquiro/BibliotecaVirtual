@@ -9,14 +9,14 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <div class="group-material-login-double">
         <div class="group-material-login">
-          <input type="text" class="material-login-control" name="name" required="" maxlength="15">
+          <input type="text" class="material-login-control" name="name" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" required="" maxlength="15">
           <span class="highlight-login"></span>
           <span class="bar-login"></span>
           <label><i class="zmdi zmdi-account"></i> &nbsp; Nombre</label>
         </div>
 
         <div class="group-material-login">
-          <input type="text" class="material-login-control" name="lastname" required="" maxlength="15">
+          <input type="text" class="material-login-control" name="lastname" required="" maxlength="15" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}">
           <span class="highlight-login"></span>
           <span class="bar-login"></span>
           <label><i class="zmdi zmdi-account"></i> &nbsp; Apellido</label>
@@ -34,14 +34,14 @@
       <div class="group-material-login-double">
 
         <div class="group-material-login">
-          <input type="number" class="material-login-control" name="dni" pattern="^[0-9]+" min="0" required="" maxlength="8">
+          <input type="number" class="material-login-control" style="width: 150px;" name="dni" min="0" required="" max="99999999" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,8}">
           <span class="highlight-login"></span>
           <span class="bar-login"></span>
           <label><i class="zmdi zmdi-account"></i> &nbsp; Dni</label>
         </div>
 
         <div class="group-material-login">
-          <input type="number" class="material-login-control" name="phone" pattern="^[0-9]+" min="0" required="" maxlength="15">
+          <input type="number" class="material-login-control" style="width: 150px;" name="phone" min="0" required="" max="999999999999999" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}">
           <span class="highlight-login"></span>
           <span class="bar-login"></span>
           <label><i class="zmdi zmdi-account"></i> &nbsp; Telefono</label>
