@@ -1,0 +1,130 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Listado de usuarios{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid"  style="margin: 50px 0;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <img src="{{ url_for('static', filename='assets/img/user03.png') }}" alt="user" class="img-responsive center-box" style="max-width: 110px;">
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
+            Bienvenido a la sección donde se encuentra el listado de usuarios registrados, podrás buscar los usuario por cedula o nombre. Puedes actualizar o eliminar los datos del usuario.<br>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li><a href="/registerUser">Nuevo usuario</a></li>
+                <li class="active">Listado de usuarios</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<form action="/updateUser/{{user.0}}" method="POST" autocomplete="off" >
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        
+        <div class="group-material-double">
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" name="name" value="{{ userEdit.2 }}" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del usuario">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Nombre</label>
+                </div>
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" name="lastname" value="{{ userEdit.3 }}" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip" data-placement="top" title="Escribe el Apellido del Estudiante">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Apellido</label>
+                </div>
+        </div>
+            <div class="group-material">
+                <input type="email" class="material-control tooltips-general" name="username"  value="{{ userEdit.4 }}"required=""  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el Email del Estudiante">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Email</label>
+            </div>
+            <div class="group-material-double">
+                <div class="group-material">
+                    <input type="number" class="material-control tooltips-general" name="dni" value="{{ userEdit.1 }}"  required="" maxlength="8" pattern="[0-9]{1,8}" data-toggle="tooltip" data-placement="top" title="Escribe el Dni del Estudiante">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Dni</label>
+                </div>
+                <div class="group-material">
+                    <input type="number" class="material-control tooltips-general" name="phone" value="{{ userEdit.5 }}" required="" maxlength="11" pattern="[0-9]{1,11}" data-toggle="tooltip" data-placement="top" title="Escribe el Telefono del Estudiante">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Telefono</label>
+                </div>
+            </div>
+            <p class="text-center">
+                <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+            </p> 
+    </div>
+</div>
+</form>
+<div class="container-fluid" style="margin: 0 0 0 0;">
+    <form class="pull-right" style="width: 30% !important;" autocomplete="off">
+        <div class="group-material">
+            <input type="search" style="display: inline-block !important; width: 70%;" class="material-control tooltips-general" placeholder="Buscar usuarios" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]{1,50}" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe los nombres, sin los apellidos">
+            <button class="btn" style="margin: 0; height: 43px; background-color: transparent !important;">
+                <i class="zmdi zmdi-search" style="font-size: 25px;"></i>
+            </button>
+        </div>
+    </form>
+</div>
+<div class="container-fluid">
+    <h2 class="text-center all-tittles">listado de usuarios</h2>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="text-center" style="margin-bottom: 30px;" role="alert">
+        <strong>--- {{ message }} ---</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <table class="table-responsive" style="display: grid;">
+        <thead class="div-table" style="margin:0 !important;">
+            <tr class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;" >
+                <td class="div-table-cell" style="width: 3%;">#</td>
+                <td class="div-table-cell" style="width: 17%;">Nombre</td>
+                <td class="div-table-cell" style="width: 19%;">Apellido</td>
+                <td class="div-table-cell" style="width: 12%;">Dni</td>
+                <td class="div-table-cell" style="width: 19%;">Email</td>
+                <td class="div-table-cell" style="width: 12%;">Teléfono</td>
+                <td class="div-table-cell" style="width: 9%;">Actualizar</td>
+                <td class="div-table-cell" style="width: 9%;">Eliminar</td>
+
+            </tr>
+        </thead>
+            <tbody class="div-table" style="margin:0 !important;">
+                {% for user in users %}
+                <tr class="div-table-row div-table-row-list">
+                    <td class="div-table-cell" style="width: 3%;">#</td>
+                    <td class="div-table-cell" style="width: 17%;">{{ user.1 }}</td>
+                    <td class="div-table-cell" style="width: 19%;">{{ user.2 }}</td>
+                    <td class="div-table-cell" style="width: 12%;">{{ user.3 }}</td>
+                    <td class="div-table-cell" style="width: 19%;" >{{ user.4 }}</td>
+                    <td class="div-table-cell" style="width: 12%;">{{ user.5 }}</td>
+                    <td class="div-table-cell" style="width: 9%;">
+                        <a href="/editUser/{{user.0}}" class="btn btn-success"><i class="zmdi zmdi-refresh"></i></a>
+                    </td>
+                    <td class="div-table-cell" style="width: 9%;">
+                        <a href="/deleteUser/{{user.0}}" class="btn btn-danger"><i class="zmdi zmdi-delete"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+{% endblock %}

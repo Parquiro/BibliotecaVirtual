@@ -65,23 +65,48 @@ def logout():
 def adminHome():
     return render_template('admin/adminHome.html')
 
-@app.route('/student', methods=['GET', 'POST'])
+@app.route('/registerUser', methods=['GET', 'POST'])
 #@login_required
-def student():
+def registerUser():
     if request.method == 'POST':
         user = User(None, request.form['dni'], request.form['name'], request.form['lastname'],
         request.form['username'], request.form['password'], request.form['phone'])
         ModelUser.register_user(db, user)
         flash('Usuario registrado satisfactoriamente')
     else: 
-        return render_template('admin/student.html')
-    return redirect(url_for('student'))
+        return render_template('admin/registerUser.html')
+    return redirect(url_for('registerUser'))
 
-@app.route('/liststudent', methods=['GET', 'POST'])
+@app.route('/userList', methods=['GET', 'POST'])
 #@login_required
-def liststudent():
+def userList():
     data = ModelUser.list_users(db)
-    return render_template('admin/liststudents.html', users = data)
+    return render_template('admin/userList.html', users = data)
+
+@app.route('/editUser/<string:id>')
+#@login_required
+def editUser(id):
+    data = ModelUser.get_user_byID(db, id)
+    user = ModelUser.list_users(db)
+    return render_template('admin/editUser.html', userEdit = data, users = user)
+
+@classmethod
+@app.route('/updateUser/<string:id>', methods = ['POST'])
+def updateUser(id):
+    if request.method == 'POST':
+        userUpdate = User(None, request.form['dni'], request.form['name'], request.form['lastname'],
+        request.form['username'], 0, request.form['phone'])
+        ModelUser.update_user(db, id, userUpdate)
+        flash('Usuario actualizado correctamente')
+        return redirect(url_for('userList'))
+
+
+@app.route('/deleteUser/<string:id>', methods=['GET', 'POST'])
+#@login_required
+def delete_user(id):
+    data = ModelUser.delete_user(db, id)
+    flash('--- Usuario eliminado correctamente ---')
+    return redirect(url_for('userList'))
 
 def status_401(error):
     return redirect(url_for('login'))

@@ -1,4 +1,3 @@
-from colorama import Cursor
 from .entities.User import User
 from werkzeug.security import generate_password_hash
 
@@ -60,5 +59,39 @@ class ModelUser():
         cur.execute(sql)
         data = cur.fetchall()
         return data
+    
+    @classmethod
+    def delete_user(self, db, id):
+        conn = db.connection
+        cur = conn.cursor()
+        sql = """DELETE FROM usuario WHERE Usu_id = {}""".format(id)
+        cur.execute(sql)
+        conn.commit()
+    
+    @classmethod
+    def get_user_byID(self, db, id):
+        conn = db.connection
+        cur = conn.cursor()
+        sql = """SELECT Usu_Id, Usu_Dni, Usu_Nombre, Usu_Apellido, Usu_Email, Usu_Telefono FROM usuario WHERE Usu_Id = {}""".format(id)
+        cur.execute(sql)
+        data = cur.fetchone()
+        return data
+
+    @classmethod
+    def update_user(self, db, id, user):
+        dni = user.dni
+        name = user.name
+        lastname = user.lastname
+        username = user.username
+        phone = user.phone
+        conn = db.connection
+        cur = conn.cursor()
+        sql = """UPDATE usuarios 
+        SET Usu_Dni = %s, Usu_Nombre = %s, Usu_Apellido = %s,
+        Usu_Email = %s, Usu_Telefono = %s
+        WHERE Usu_Id = %s""", (dni, name, lastname, username, phone, id)
+        conn.commit()
+
+        
         
 
