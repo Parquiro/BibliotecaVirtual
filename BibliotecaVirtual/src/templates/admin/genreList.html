@@ -1,0 +1,74 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Listado de generos{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/flat-book.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la sección donde se encuentra el listado de generos registrados, podrás buscar los generos por nombre. Puedes actualizar o eliminar los datos de un genero.
+{% endblock %}
+
+{{ administrativePanel }}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li><a href="/addGenre">Nuevo genero</a></li>
+                <li class="active">Listado de generos</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="margin: 0 0 0 0;">
+    <form action="/searchGenres" method = "POST" class="pull-right" style="width: 30% !important;" autocomplete="off">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="group-material">
+            <input type="search" style="display: inline-block !important; width: 70%;" class="material-control tooltips-general" name="searchCondition" placeholder="Buscar usuarios" pattern="[a-zA-ZáéíóúÁÉÍÓÚ 0-9 ]{1,50}" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe un dato">
+            <button type="submit" class="btn" style="margin: 0; height: 43px; background-color: transparent !important;">
+                <i class="zmdi zmdi-search" style="font-size: 25px;"></i>
+            </button>
+        </div>
+    </form>
+</div>
+<div class="container-fluid">
+    <h2 class="text-center all-tittles">listado de generos</h2>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="text-center" style="margin-bottom: 30px;" role="alert">
+        <strong>--- {{ message }} ---</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <table class="table-responsive" style="display: grid;">
+        <thead class="div-table" style="margin:0 !important;">
+            <tr class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;" >
+                <td class="div-table-cell" style="width: 3%;">#</td>
+                <td class="div-table-cell" style="width: 17%;">Nombre</td>
+                <td class="div-table-cell" style="width: 9%;">Actualizar</td>
+                <td class="div-table-cell" style="width: 9%;">Eliminar</td>
+
+            </tr>
+        </thead>
+            <tbody class="div-table" style="margin:0 !important;">
+                {% for genre in genres %}
+                <tr class="div-table-row div-table-row-list">
+                    <td class="div-table-cell" style="width: 3%;">#</td>
+                    <td class="div-table-cell" style="width: 17%;">{{ genre.1 }}</td>
+                    <td class="div-table-cell" style="width: 9%;">
+                        <a href="/editGenre/{{genre.0}}" class="btn btn-success"><i class="zmdi zmdi-refresh"></i></a>
+                    </td>
+                    <td class="div-table-cell" style="width: 9%;">
+                        <a data-href="/deleteGenre/{{genre.0}}" data-placement="bottom" class="btn btn-danger delete-author-button"><i class="zmdi zmdi-delete"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+{% endblock %}

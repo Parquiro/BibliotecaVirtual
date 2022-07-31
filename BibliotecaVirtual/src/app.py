@@ -8,10 +8,12 @@ from config import config
 #Models
 from models.ModelUser import ModelUser
 from models.ModelAuthor import ModelAuthor
+from models.ModelGenre import ModelGenre
 
 #Entities
 from models.entities.User import User
 from models.entities.Author import Author
+from models.entities.Genre import Genre
 
 app = Flask(__name__)
 app.secret_key = 'mySecretKey'
@@ -67,7 +69,9 @@ def logout():
 def adminHome():
     users = ModelUser.count_users(db)
     authors = ModelAuthor.count_authors(db)
-    return render_template('admin/adminHome.html', countUsers = users, countAuthors = authors)
+    genres = ModelGenre.count_genres(db)
+    return render_template('admin/adminHome.html', countUsers = users, countAuthors = authors,
+    countGenres = genres)
 
 @app.route('/registerUser', methods=['GET', 'POST'])
 #@login_required
@@ -91,6 +95,16 @@ def addAuthor():
         return render_template('admin/newAutor.html')
     return redirect(url_for('addAuthor'))
 
+@app.route('/addGenre', methods=['GET', 'POST'])
+def addGenre():
+    if request.method == 'POST':
+        genre = Genre(None, request.form['genreName'])
+        ModelGenre.register_genre(db, genre)
+        flash('Genero registrado satisfactoriamente')
+    else:
+        return render_template('admin/newGenre.html')
+    return redirect(url_for('addGenre'))
+
 @app.route('/userList', methods=['GET', 'POST'])
 #@login_required
 def userList():
@@ -101,6 +115,11 @@ def userList():
 def authorList():
     data = ModelAuthor().list_authors(db)
     return render_template('admin/authorList.html', authors = data)
+
+@app.route('/genreList', methods=['GET', 'POST'])
+def genreList():
+    data = ModelGenre().list_genre(db)
+    return render_template('admin/genreList.html', genres = data)
 
 @app.route('/searchUsers', methods=['GET', 'POST'])
 def searchUsers():
@@ -113,6 +132,12 @@ def searchAuthors():
     searchCondition = request.form['searchCondition']
     data = ModelAuthor().search_author(db, searchCondition)
     return render_template('admin/authorList.html', authors = data)
+
+@app.route('/searchGenres', methods=['GET', 'POST'])
+def searchGenres():
+    searchCondition = request.form['searchCondition']
+    data = ModelGenre().search_genre(db, searchCondition)
+    return render_template('admin/genreList.html', genres = data)
 
 @app.route('/editUser/<string:id>')
 #@login_required
@@ -127,6 +152,13 @@ def editAuthor(id):
     data = ModelAuthor.get_author_byID(db, id)
     authors = ModelAuthor.list_authors(db)
     return render_template('admin/editAuthor.html', authorEdit = data, authors = authors)
+
+@app.route('/editGenre/<string:id>')
+#@login_required
+def editGenre(id):
+    data = ModelGenre.get_genre_byID(db, id)
+    genres = ModelGenre.list_genre(db)
+    return render_template('admin/editGenre.html', genreEdit = data, genres = genres)
 
 @app.route('/updateUser/<string:id>', methods = ['POST'])
 def updateUser(id):
@@ -143,6 +175,12 @@ def updateAuthor(id):
     flash('Autor actualizado correctamente')
     return redirect(url_for('authorList'))
 
+@app.route('/updateGenre/<string:id>', methods = ['POST'])
+def updateGenre(id):
+    genreUpdate = Genre(id, request.form['genreName'])
+    ModelGenre.update_genre(db, id, genreUpdate)
+    flash('Genero actualizado correctamente')
+    return redirect(url_for('genreList'))
 
 @app.route('/deleteUser/<string:id>', methods=['GET', 'POST'])
 #@login_required
@@ -155,8 +193,15 @@ def delete_user(id):
 #@login_required
 def delete_author(id):
     data = ModelAuthor.delete_author(db, id)
-    flash('--- Usuario eliminado correctamente ---')
+    flash('--- Autor eliminado correctamente ---')
     return redirect(url_for('authorList'))
+
+@app.route('/deleteGenre/<string:id>', methods=['GET', 'POST'])
+#@login_required
+def delete_genre(id):
+    data = ModelGenre.delete_genre(db, id)
+    flash('--- Genero eliminado correctamente ---')
+    return redirect(url_for('genreList'))
 
 def status_401(error):
     return redirect(url_for('login'))
