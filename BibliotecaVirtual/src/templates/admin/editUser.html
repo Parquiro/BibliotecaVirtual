@@ -2,21 +2,17 @@
 
 {% block title %}Listado de usuarios{% endblock %}
 {% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/user03.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la seccion donde puedes editar usuarios, edita el campo
+            a actualizar y presiona guardar para guardar los cambios
+{% endblock %}
+
+{{ administrativePanel }}
 
 {% block body %}
 
-<div class="container-fluid" style="margin: 50px 0;">
-    <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <img src="{{ url_for('static', filename='assets/img/user03.png') }}" alt="user"
-                class="img-responsive center-box" style="max-width: 110px;">
-        </div>
-        <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
-            Bienvenido a la seccion donde puedes editar usuarios, edita el campo
-            a actualizar y presiona guardar para guardar los cambios<br>
-        </div>
-    </div>
-</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 lead">

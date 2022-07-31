@@ -1,0 +1,58 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Editar autor{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/user05.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la seccion donde puedes editar autores, edita el campo
+            a actualizar y presiona guardar para guardar los cambios
+{% endblock %}
+
+{{ administrativePanel }}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li><a href="/addAuthor">Nuevo autor</a></li>
+                <li><a href="/authorList">Listado de autores</a></li>
+                <li class="active">Editar autor</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<form action="/updateAuthor/{{authorEdit.0}}" method="POST" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+          
+            <div class="group-material">
+                <input type="text" class="material-control tooltips-general" name="authorName" value="{{ authorEdit.1 }}"
+                    required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip"
+                    data-placement="top" title="Escribe el nombre del usuario" placeholder="Escribe aquí el nombre del autor" > 
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Nombre</label>
+            </div>
+            <div class="group-material">
+                <input type="text" class="material-control tooltips-general" name="authorLastname" placeholder="Escribe aquí el apellido del autor" 
+                    value="{{ authorEdit.2 }}" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}"
+                    data-toggle="tooltip" data-placement="top" title="Escribe el Apellido del Autor">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Apellido</label>
+            </div>
+
+            <p class="text-center">
+                <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i>
+                    &nbsp;&nbsp; Limpiar</button>
+                <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp;
+                    Guardar</button>
+            </p>
+        </div>
+    </div>
+</form>
+{% endblock %}

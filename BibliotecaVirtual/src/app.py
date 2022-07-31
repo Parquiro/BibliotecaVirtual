@@ -65,8 +65,9 @@ def logout():
 @app.route('/adminHome')
 #@login_required
 def adminHome():
-    data = ModelUser.count_users(db)
-    return render_template('admin/adminHome.html', countUsers = data)
+    users = ModelUser.count_users(db)
+    authors = ModelAuthor.count_authors(db)
+    return render_template('admin/adminHome.html', countUsers = users, countAuthors = authors)
 
 @app.route('/registerUser', methods=['GET', 'POST'])
 #@login_required
@@ -96,12 +97,22 @@ def userList():
     data = ModelUser.list_users(db)
     return render_template('admin/userList.html', users = data)
 
+@app.route('/authorList', methods=['GET', 'POST'])
+def authorList():
+    data = ModelAuthor().list_authors(db)
+    return render_template('admin/authorList.html', authors = data)
+
 @app.route('/searchUsers', methods=['GET', 'POST'])
 def searchUsers():
     searchCondition = request.form['searchCondition']
     data = ModelUser.search_user(db, searchCondition)
     return render_template('admin/userList.html', users = data)
 
+@app.route('/searchAuthors', methods=['GET', 'POST'])
+def searchAuthors():
+    searchCondition = request.form['searchCondition']
+    data = ModelAuthor().search_author(db, searchCondition)
+    return render_template('admin/authorList.html', authors = data)
 
 @app.route('/editUser/<string:id>')
 #@login_required
@@ -109,6 +120,13 @@ def editUser(id):
     data = ModelUser.get_user_byID(db, id)
     user = ModelUser.list_users(db)
     return render_template('admin/editUser.html', userEdit = data, users = user)
+
+@app.route('/editAuthor/<string:id>')
+#@login_required
+def editAuthor(id):
+    data = ModelAuthor.get_author_byID(db, id)
+    authors = ModelAuthor.list_authors(db)
+    return render_template('admin/editAuthor.html', authorEdit = data, authors = authors)
 
 @app.route('/updateUser/<string:id>', methods = ['POST'])
 def updateUser(id):
@@ -118,6 +136,13 @@ def updateUser(id):
     flash('Usuario actualizado correctamente')
     return redirect(url_for('userList'))
 
+@app.route('/updateAuthor/<string:id>', methods = ['POST'])
+def updateAuthor(id):
+    authorUpdate = Author(id, request.form['authorName'], request.form['authorLastname'])
+    ModelAuthor.update_author(db, id, authorUpdate)
+    flash('Autor actualizado correctamente')
+    return redirect(url_for('authorList'))
+
 
 @app.route('/deleteUser/<string:id>', methods=['GET', 'POST'])
 #@login_required
@@ -125,6 +150,13 @@ def delete_user(id):
     data = ModelUser.delete_user(db, id)
     flash('--- Usuario eliminado correctamente ---')
     return redirect(url_for('userList'))
+
+@app.route('/deleteAuthor/<string:id>', methods=['GET', 'POST'])
+#@login_required
+def delete_author(id):
+    data = ModelAuthor.delete_author(db, id)
+    flash('--- Usuario eliminado correctamente ---')
+    return redirect(url_for('authorList'))
 
 def status_401(error):
     return redirect(url_for('login'))

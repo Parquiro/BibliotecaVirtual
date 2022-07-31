@@ -7,7 +7,7 @@
 
 <section class="full-reset text-center" style="padding: 40px 0; margin-bottom: 20%; margin-top: -30%;">
     <article class="tile">
-        <a class="tile-icon full-reset" href="listadmin.html"><i class="zmdi zmdi-face"></i></a>
+        <a class="tile-icon full-reset" href="/adminList"><i class="zmdi zmdi-face"></i></a>
         <div class="tile-name all-tittles">administradores</div>
         <div class="tile-num full-reset">7</div>
     </article>
@@ -17,19 +17,19 @@
         <div class="tile-num full-reset">{{ countUsers.0 }}</div>
     </article>
     <article class="tile">
-        <a class="tile-icon full-reset" href="catalog.html"><i class="zmdi zmdi-book"></i></a>
+        <a class="tile-icon full-reset" href="/bookList"><i class="zmdi zmdi-book"></i></a>
         <div class="tile-name all-tittles">libros</div>
         <div class="tile-num full-reset">77</div>
     </article>
     <article class="tile">
-        <a class="tile-icon full-reset" href="listcategory.html"><i class="zmdi zmdi-bookmark-outline"></i></a>
+        <a class="tile-icon full-reset" href="/categoryList"><i class="zmdi zmdi-bookmark-outline"></i></a>
         <div class="tile-name all-tittles">categorías</div>
         <div class="tile-num full-reset">11</div>
     </article>
     <article class="tile">
-        <a class="tile-icon full-reset" href="listcategory.html"><i class="zmdi zmdi-account-box-mail"></i></a>
+        <a class="tile-icon full-reset" href="/authorList"><i class="zmdi zmdi-account-box-mail"></i></a>
         <div class="tile-name all-tittles">autores</div>
-        <div class="tile-num full-reset">11</div>
+        <div class="tile-num full-reset">{{ countAuthors.0 }}</div>
     </article>
 </section>
 {% endblock %}
