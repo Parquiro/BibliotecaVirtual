@@ -52,7 +52,7 @@
                         <ul class="list-unstyled">
                             <li><a href="category.html"><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp; Nueva categoría</a></li>
                             <li><a href="book.html"><i class="zmdi zmdi-book zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo libro</a></li>
-                            <li><a href="autor.html"><i class="zmdi zmdi-face zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo Autor</a></li>
+                            <li><a href="/addAuthor"><i class="zmdi zmdi-account-box-mail zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo Autor</a></li>
                         </ul>
                     </li>
                     <li>
@@ -95,8 +95,20 @@
                 </li>
             </ul>
         </nav>
-
-
+        {% block administrativePanel %}
+        <div class="container-fluid" style="margin: 50px 0;">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <img src="{% block descriptionImage %}{% endblock %}"
+                        class="img-responsive center-box" style="max-width: 110px;">
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
+                    {% block description %}
+                    {% endblock %}<br>
+                </div>
+            </div>
+        </div>
+       {% endblock %}
        {% block body %}
        {% endblock %} 
 

@@ -7,9 +7,11 @@ from config import config
 
 #Models
 from models.ModelUser import ModelUser
+from models.ModelAuthor import ModelAuthor
 
 #Entities
 from models.entities.User import User
+from models.entities.Author import Author
 
 app = Flask(__name__)
 app.secret_key = 'mySecretKey'
@@ -77,6 +79,16 @@ def registerUser():
     else: 
         return render_template('admin/registerUser.html')
     return redirect(url_for('registerUser'))
+
+@app.route('/addAuthor', methods=['GET', 'POST'])
+def addAuthor():
+    if request.method == 'POST':
+        author = Author(None, request.form['authorName'], request.form['authorLastname'])
+        ModelAuthor.register_author(db, author)
+        flash('Autor registrado satisfactoriamente')
+    else:
+        return render_template('admin/newAutor.html')
+    return redirect(url_for('addAuthor'))
 
 @app.route('/userList', methods=['GET', 'POST'])
 #@login_required

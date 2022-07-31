@@ -2,28 +2,19 @@
 
 {% block title %}Registro de Usuarios{% endblock %}
 {% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/user03.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la sección para registrar nuevos estudiantes, para poder registrar un estudiante deberás de llenar todos los campos del siguiente formulario
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="page-header">
-      <h1 class="all-tittles">Sistema Bibliotecario <small>Panel administrativo</small></h1>
-    </div>
-</div>
-<div class="container-fluid"  style="margin: 50px 0;">
-    <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <img src="{{ url_for('static', filename='assets/img/user03.png') }}" alt="user" class="img-responsive center-box" style="max-width: 110px;">
-        </div>
-        <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
-            Bienvenido a la sección para registrar nuevos estudiantes, para poder registrar un estudiante deberás de llenar todos los campos del siguiente formulario
-        </div>
-    </div>
-</div>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 lead">
             <ol class="breadcrumb">
-              <li class="active">Nuevo estudiante</li>
+              <li class="active">Nuevo usuario</li>
               <li><a href="/userList">Listado de usuarios</a></li>
             </ol>
         </div>
