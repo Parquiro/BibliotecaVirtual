@@ -42,8 +42,8 @@ Bienvenido a la sección para agregar nuevos libros a la biblioteca, deberas de 
                     <div class="group-material-double">
                         <div class="group-material">
                             <span>Genero</span>
-                            <select class="tooltips-general material-control" name="bookGenre" data-toggle="tooltip" data-placement="top" title="Elige la categoría del libro">
-                                <option value="" disabled="" selected="">Selecciona un genero</option>
+                            <select class="tooltips-general material-control" name="bookGenre" required="" data-toggle="tooltip" data-placement="top" title="Elige la categoría del libro">
+                                <option value="" disabled="" selected=""></option>
                                 {% for genre in genres %}
                                 <option value="{{ genre.0 }}">{{ genre.1 }}</option>
                                 {% endfor %}
@@ -51,8 +51,8 @@ Bienvenido a la sección para agregar nuevos libros a la biblioteca, deberas de 
                         </div>
                         <div class="group-material">
                             <span>Autor</span>
-                            <select class="tooltips-general material-control" name="bookAuthor" data-toggle="tooltip" data-placement="top" title="Elige un Autor">
-                                <option value="" disabled="" selected="">Selecciona un autor</option>
+                            <select class="tooltips-general material-control" name="bookAuthor" required="" data-toggle="tooltip" data-placement="top" title="Elige un Autor">
+                                <option value="" disabled="" selected=""></option>
                                 {% for author in authors %}
                                 <option value="{{ author.0 }}">{{ author.1 }}</option>
                                 {% endfor %}

@@ -29,3 +29,18 @@ class ModelBook():
         cur.execute(sql)
         data = cur.fetchall()
         return data
+
+    @classmethod
+    def get_book_byID(self, db, id):
+        cur = db.connection.cursor()
+        sql = """
+        SELECT Lib_Id, 
+            Lib_Nombre,  Lib_IdGenero,
+            Lib_IdAutor, Lib_Descripcion,
+            Lib_Url, Lib_Editorial,
+            Lib_FPublicacion, Lib_NroPaginas
+        FROM libro
+        WHERE Lib_Id = {}""".format(id)
+        cur.execute(sql)
+        data = cur.fetchone()
+        return data

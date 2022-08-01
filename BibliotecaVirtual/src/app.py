@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, Response
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required
+from fpdf import FPDF
 
 from config import config
 
@@ -164,29 +165,28 @@ def searchGenres():
 #@login_required
 def editUser(id):
     data = ModelUser.get_user_byID(db, id)
-    user = ModelUser.list_users(db)
-    return render_template('admin/editUser.html', userEdit = data, users = user)
+    return render_template('admin/editUser.html', userEdit = data)
 
 @app.route('/editAuthor/<string:id>')
 #@login_required
 def editAuthor(id):
     data = ModelAuthor.get_author_byID(db, id)
-    authors = ModelAuthor.list_authors(db)
-    return render_template('admin/editAuthor.html', authorEdit = data, authors = authors)
+    return render_template('admin/editAuthor.html', authorEdit = data)
 
 @app.route('/editGenre/<string:id>')
 #@login_required
 def editGenre(id):
     data = ModelGenre.get_genre_byID(db, id)
-    genres = ModelGenre.list_genre(db)
-    return render_template('admin/editGenre.html', genreEdit = data, genres = genres)
+    return render_template('admin/editGenre.html', genreEdit = data)
 
 @app.route('/editBook/<string:id>')
 #@login_required
 def editBook(id):
-    data = ModelBook.get_book_byID(db, id)
-    books = ModelBook.list_book(db)
-    return render_template('admin/editGenre.html', bookEdit = data, books = books)
+    bookEdit = ModelBook.get_book_byID(db, id)
+    print(bookEdit)
+    genre = ModelGenre().list_genre(db)
+    author = ModelAuthor().list_authors(db)
+    return render_template('admin/editBook.html', bookEdit = bookEdit, genres = genre, authors = author)
 
 @app.route('/updateUser/<string:id>', methods = ['POST'])
 def updateUser(id):
@@ -230,6 +230,48 @@ def delete_genre(id):
     data = ModelGenre.delete_genre(db, id)
     flash('--- Genero eliminado correctamente ---')
     return redirect(url_for('genreList'))
+
+#asdasd
+@app.route('/report')
+def download_report():
+    conn = None
+    cursor = None
+    conn = db.connection
+    cursor = conn.cursor()
+    cursor.execute("SELECT Usu_Nombre, Usu_Apellido, Usu_Dni, Usu_Email, Usu_Telefono FROM usuario")
+    result = cursor.fetchall()
+    pdf = FPDF()
+    pdf.add_page()
+
+    page_width = pdf.w - 2 * pdf.l_margin
+
+    pdf.set_font('Times', 'B', 14.0)
+    pdf.cell(page_width, 0.0, 'Usuarios registrados', align='C')
+    pdf.ln(10)
+
+    pdf.set_font('Courier', '', 12)
+
+    col_width = page_width/4
+
+    pdf.ln(1)
+
+    th = pdf.font_size
+
+    for row in result:
+            pdf.cell(col_width, th, str(row[0]), border=1)
+            pdf.cell(col_width, th, row[1], border=1)
+            pdf.cell(col_width, th, str(row[2]), border=1)
+            pdf.cell(col_width, th, row[4], border=1)
+            pdf.ln(th)
+
+    pdf.ln(10)
+
+    pdf.set_font('Times', '', 10.0)
+    pdf.cell(page_width, 0.0, '- end of report -', align='C')
+
+    return Response(pdf.output(dest='S').encode('latin-1'), mimetype='application/pdf', headers={'Content-Disposition': 'attachment;filename=users_report.pdf'})
+
+
 
 def status_401(error):
     return redirect(url_for('login'))
