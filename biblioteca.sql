@@ -31,20 +31,13 @@ CREATE TABLE IF NOT EXISTS `libro` (
   `Lib_NroPaginas` int unsigned NOT NULL DEFAULT '0',
   `Lib_FPublicacion` date NOT NULL,
   `Lib_IdAutor` tinyint unsigned NOT NULL,
+  `Lib_IdGenero` tinyint unsigned NOT NULL,
   PRIMARY KEY (`Lib_Id`),
   UNIQUE KEY `Lib_IdAutor` (`Lib_IdAutor`),
   KEY `Lib_Nombre` (`Lib_Nombre`),
   CONSTRAINT `FK_libro_autor` FOREIGN KEY (`Lib_IdAutor`) REFERENCES `autor` (`Aut_Id`)
+  CONSTRAINT `FK_libro_genero` FOREIGN KEY (`Lib_IdGenero`) REFERENCES `genero` (`Gen_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Entidad de libros.';
-
-CREATE TABLE IF NOT EXISTS `librocategoria` (
-  `Id_Libro` int unsigned NOT NULL,
-  `Id_Categoria` tinyint unsigned NOT NULL,
-  UNIQUE KEY `Id_Libro` (`Id_Libro`),
-  UNIQUE KEY `Id_Categoria` (`Id_Categoria`),
-  CONSTRAINT `FK_librocategoria_categoria` FOREIGN KEY (`Id_Categoria`) REFERENCES `genero` (`Gen_Id`),
-  CONSTRAINT `FK_librocategoria_libro` FOREIGN KEY (`Id_Libro`) REFERENCES `libro` (`Lib_Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Relacion entre entidades libro y categoria.';
 
 CREATE TABLE IF NOT EXISTS `librofavorito` (
   `Id_Usuario` int unsigned NOT NULL,
@@ -61,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Usu_Nombre` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
   `Usu_Apellido` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
   `Usu_Email` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `Usu_Password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Usu_Password` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Usu_Telefono` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`Usu_Id`),
   UNIQUE KEY `Usu_Dni` (`Usu_Dni`),

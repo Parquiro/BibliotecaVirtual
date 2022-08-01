@@ -1,0 +1,89 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Agregar Libro{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/book.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la sección para agregar nuevos libros a la biblioteca, deberas de llenar todos los campos para poder registrar el libro
+{% endblock %}
+
+{{ administrativePanel }}
+
+{% block body %}
+
+<div class="container-fluid">
+    <form autocomplete="off">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="container-flat-form">
+            <div class="title-flat-form title-flat-blue">Nuevo libro</div>
+            <div class="row">
+               <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <legend><strong>Información básica</strong></legend><br>
+
+                    <div class="group-material">
+                        <input type="text" class="tooltips-general material-control" placeholder="Escribe aquí el título o nombre del libro" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el título o nombre del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Título</label>
+                    </div>
+
+                    <div class="group-material-double">
+                        <div class="group-material">
+                            <span>Genero</span>
+                            <select class="tooltips-general material-control" data-toggle="tooltip" data-placement="top" title="Elige la categoría del libro">
+                                <option value="" disabled="" selected="">Selecciona un genero</option>
+                                {% for genre in genres %}
+                                <option value="{{ genre.1 }}">{{ genre.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="group-material">
+                            <span>Autor</span>
+                            <select class="tooltips-general material-control" data-toggle="tooltip" data-placement="top" title="Elige un Autor">
+                                <option value="" disabled="" selected="">Selecciona un autor</option>
+                                {% for author in authors %}
+                                <option value="{{ author.1 }}">{{ author.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí la descripcion del libro" required="" maxlength="300" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Descripcion</label>
+                    </div>
+                    <legend><strong>Otros datos</strong></legend><br>
+
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí la editorial del libro" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Editorial</label>
+                    </div>
+                    <div class="group-material-double">
+                        <div class="group-material">
+                            <input type="date" class="material-control tooltips-general" placeholder="Escribe aquí el año del libro" required="" pattern="[0-9]{1,4}" maxlength="4" data-toggle="tooltip" data-placement="top" title="Solamente números, sin espacios">
+                             <span class="highlight"></span>
+                             <span class="bar"></span>
+                             <label>Año</label>
+                        </div>
+                        <div class="group-material">
+                            <input type="number" class="material-control tooltips-general" placeholder="Escribe aquí el numero de paginas del libro" required="" min="0" max="9999999" data-toggle="tooltip" data-placement="top" title="Edición del libro">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Numero de Paginas</label>
+                        </div>
+                    </div>
+                    <p class="text-center">
+                        <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                    </p>
+               </div>
+           </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

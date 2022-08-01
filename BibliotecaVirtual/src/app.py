@@ -105,6 +105,16 @@ def addGenre():
         return render_template('admin/newGenre.html')
     return redirect(url_for('addGenre'))
 
+@app.route('/addBook', methods=['GET', 'POST'])
+def addBook():
+    if request.method == 'POST':
+        a = a
+    else:
+        dataAuthors = ModelAuthor.list_authors(db)
+        dataGenres = ModelGenre.list_genre(db)
+        return render_template('admin/addBook.html', authors = dataAuthors, genres = dataGenres)
+    return redirect(url_for('addBook'))
+
 @app.route('/userList', methods=['GET', 'POST'])
 #@login_required
 def userList():
