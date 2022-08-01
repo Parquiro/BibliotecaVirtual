@@ -1,0 +1,104 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Listado de libros{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/book.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la sección donde se encuentra el listado de libros registrados, podrás buscar los libros por titulo. Puedes actualizar o eliminar los datos del libro.
+{% endblock %}
+
+{{ administrativePanel }}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li><a href="/registerUser">Nuevo libro</a></li>
+                <li><a href="/userList">Listado de libros</a></li>
+                <li class="active">Editar libro</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<form action="/updateBook/{{bookEdit.0}}" method="POST" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="container-flat-form">
+        <div class="title-flat-form title-flat-blue">Editar libro</div>
+        <div class="row">
+           <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <legend><strong>Información básica</strong></legend><br>
+
+                <div class="group-material">
+                    <input type="text" class="tooltips-general material-control" name="bookName" value="{{ bookEdit.1 }}" placeholder="Escribe aquí el título o nombre del libro" required="" maxlength="30" data-toggle="tooltip" data-placement="top" title="Escribe el título o nombre del libro">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Título</label>
+                </div>
+
+                <div class="group-material-double">
+                    <div class="group-material">
+                        <span>Genero</span>
+                        <select class="tooltips-general material-control" name="bookGenre" data-toggle="tooltip" data-placement="top" title="Elige la categoría del libro">
+                            <option value="" disabled="" selected="">Selecciona un genero</option>
+                            {% for genre in genres %}
+                            <option value="{{ genre.0 }}">{{ genre.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="group-material">
+                        <span>Autor</span>
+                        <select class="tooltips-general material-control" name="bookAuthor" data-toggle="tooltip" data-placement="top" title="Elige un Autor">
+                            <option value="{{ bookEdit.1 }}" selected="">Selecciona un autor</option>
+                            {% for author in authors %}
+                            <option value="{{ author.0 }}">{{ author.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" name="bookDescription" placeholder="Escribe aquí la descripcion del libro" required="" maxlength="300" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Descripcion</label>
+                </div>
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" name="bookUrl" placeholder="Pega aqui el link del libro" required="" maxlength="300" data-toggle="tooltip" data-placement="top" title="Link del libro">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Link</label>
+                </div>
+                <legend><strong>Otros datos</strong></legend><br>
+
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" name="bookEditorial" placeholder="Escribe aquí la editorial del libro" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Editorial</label>
+                </div>
+                <div class="group-material-double">
+                    <div class="group-material">
+                        <input type="date" class="material-control tooltips-general" name="bookDate" placeholder="Escribe aquí el año del libro" required="" pattern="[0-9]{1,4}" maxlength="4" data-toggle="tooltip" data-placement="top" title="Solamente números, sin espacios">
+                         <span class="highlight"></span>
+                         <span class="bar"></span>
+                         <label>Año</label>
+                    </div>
+                    <div class="group-material">
+                        <input type="number" class="material-control tooltips-general" name="bookPages" placeholder="Escribe aquí el numero de paginas del libro" required="" min="0" max="9999999" data-toggle="tooltip" data-placement="top" title="Edición del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Numero de Paginas</label>
+                    </div>
+                </div>
+                <p class="text-center">
+                    <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                    <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                </p>
+           </div>
+       </div>
+    </div>
+</form>
+
+{% endblock %}

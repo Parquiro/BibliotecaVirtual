@@ -9,11 +9,13 @@ from config import config
 from models.ModelUser import ModelUser
 from models.ModelAuthor import ModelAuthor
 from models.ModelGenre import ModelGenre
+from models.ModelBook import ModelBook
 
 #Entities
 from models.entities.User import User
 from models.entities.Author import Author
 from models.entities.Genre import Genre
+from models.entities.Book import Book
 
 app = Flask(__name__)
 app.secret_key = 'mySecretKey'
@@ -108,7 +110,11 @@ def addGenre():
 @app.route('/addBook', methods=['GET', 'POST'])
 def addBook():
     if request.method == 'POST':
-        a = a
+        book = Book(None, request.form['bookName'], request.form['bookEditorial'], 
+        request.form['bookPages'], request.form['bookDate'], request.form['bookAuthor'], 
+        request.form['bookGenre'], request.form['bookDescription'], request.form['bookUrl'])
+        ModelBook.register_book(db, book)
+        flash('Libro registrado satisfactoriamente')
     else:
         dataAuthors = ModelAuthor.list_authors(db)
         dataGenres = ModelGenre.list_genre(db)
@@ -130,6 +136,11 @@ def authorList():
 def genreList():
     data = ModelGenre().list_genre(db)
     return render_template('admin/genreList.html', genres = data)
+
+@app.route('/bookList', methods=['GET', 'POST'])
+def bookList():
+    data = ModelBook().list_book(db)
+    return render_template('admin/bookList.html', books = data)
 
 @app.route('/searchUsers', methods=['GET', 'POST'])
 def searchUsers():
@@ -169,6 +180,13 @@ def editGenre(id):
     data = ModelGenre.get_genre_byID(db, id)
     genres = ModelGenre.list_genre(db)
     return render_template('admin/editGenre.html', genreEdit = data, genres = genres)
+
+@app.route('/editBook/<string:id>')
+#@login_required
+def editBook(id):
+    data = ModelBook.get_book_byID(db, id)
+    books = ModelBook.list_book(db)
+    return render_template('admin/editGenre.html', bookEdit = data, books = books)
 
 @app.route('/updateUser/<string:id>', methods = ['POST'])
 def updateUser(id):
