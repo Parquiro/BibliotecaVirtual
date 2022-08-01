@@ -33,7 +33,10 @@ Bienvenido a la sección donde se encuentra el listado de usuarios registrados, 
         </div>
     </form>
 </div>
-<div class="container-fluid">
+<div class="container-fluid pull-left" style="width: 10%;" style="margin-bottom: 100%;">
+    <a class="zmdi zmdi-file-text zmdi-hc-3x" href="/report"></a>
+</div>
+<div class="container-fluid" style="margin-bottom: 20px;">
     <h2 class="text-center all-tittles">listado de usuarios</h2>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
