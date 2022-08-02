@@ -48,6 +48,7 @@ class ModelUser():
             cursor = db.connection.cursor()
             cursor.execute("INSERT INTO usuario VALUES (%s,%s,%s,%s,%s,%s,%s)", (id, dni, name, lastname, username, password, phone))
             conn.commit()
+            conn.close()
         except Exception as ex:
             raise Exception(ex)
     
@@ -67,6 +68,7 @@ class ModelUser():
         sql = """DELETE FROM usuario WHERE Usu_id = {}""".format(id)
         cur.execute(sql)
         conn.commit()
+        conn.close()
     
     @classmethod
     def get_user_byID(self, db, id):
@@ -95,6 +97,7 @@ class ModelUser():
             Usu_Telefono = %s
         WHERE Usu_Id = %s """, (dni, name, lastname, username, phone, id))
         conn.commit()
+        conn.close()
 
     @classmethod
     def count_users(self, db):

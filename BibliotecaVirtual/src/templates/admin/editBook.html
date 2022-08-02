@@ -42,18 +42,22 @@ Bienvenido a la sección donde se encuentra el listado de libros registrados, po
                     <div class="group-material">
                         <span>Genero</span>
                         <select class="tooltips-general material-control" name="bookGenre" data-toggle="tooltip" data-placement="top" title="Elige la categoría del libro">
-                            <option value="" disabled="" selected=""></option>
+                            <option value="{{ bookEdit.2 }}"  selected="">{{ bookEdit.2 }}</option>
                             {% for genre in genres %}
+                            {% if genre.0 != bookEdit.2 %}
                             <option value="{{ genre.0 }}">{{ genre.1 }}</option>
+                            {% endif %}
                             {% endfor %}
                         </select>
                     </div>
                     <div class="group-material">
                         <span>Autor</span>
                         <select class="tooltips-general material-control" name="bookAuthor" data-toggle="tooltip" data-placement="top" title="Elige un Autor">
-                            <option value="" disabled="" selected=""></option>
+                            <option value="{{ bookEdit.3 }}" selected="">{{ bookEdit.3 }}</option>
                             {% for author in authors %}
+                            {% if author.0 != bookEdit.3 %}
                             <option value="{{ author.0 }}">{{ author.1 }}</option>
+                            {% endif %}
                             {% endfor %}
                         </select>
                     </div>

@@ -73,8 +73,9 @@ def adminHome():
     users = ModelUser.count_users(db)
     authors = ModelAuthor.count_authors(db)
     genres = ModelGenre.count_genres(db)
+    books = ModelBook.count_books(db)
     return render_template('admin/adminHome.html', countUsers = users, countAuthors = authors,
-    countGenres = genres)
+    countGenres = genres, countBooks = books)
 
 @app.route('/registerUser', methods=['GET', 'POST'])
 #@login_required
@@ -161,6 +162,12 @@ def searchGenres():
     data = ModelGenre().search_genre(db, searchCondition)
     return render_template('admin/genreList.html', genres = data)
 
+@app.route('/searchBooks', methods=['GET', 'POST'])
+def searchBooks():
+    searchCondition = request.form['searchCondition']
+    data = ModelBook().search_book(db, searchCondition)
+    return render_template('admin/bookList.html', books = data)
+
 @app.route('/editUser/<string:id>')
 #@login_required
 def editUser(id):
@@ -210,6 +217,15 @@ def updateGenre(id):
     flash('Genero actualizado correctamente')
     return redirect(url_for('genreList'))
 
+@app.route('/updateBook/<string:id>', methods = ['POST'])
+def updateBook(id):
+    bookUpdate = Book(id, request.form['bookName'], request.form['bookEditorial'], 
+    request.form['bookPages'], request.form['bookDate'], request.form['bookAuthor'], 
+    request.form['bookGenre'], request.form['bookDescription'], request.form['bookUrl'])
+    ModelBook.update_book(db, id, bookUpdate)
+    flash('Libro actualizado correctamente')
+    return redirect(url_for('bookList'))
+
 @app.route('/deleteUser/<string:id>', methods=['GET', 'POST'])
 #@login_required
 def delete_user(id):
@@ -230,6 +246,13 @@ def delete_genre(id):
     data = ModelGenre.delete_genre(db, id)
     flash('--- Genero eliminado correctamente ---')
     return redirect(url_for('genreList'))
+
+@app.route('/deleteBook/<string:id>', methods=['GET', 'POST'])
+#@login_required
+def delete_book(id):
+    data = ModelBook.delete_book(db, id)
+    flash('--- Libro eliminado correctamente ---')
+    return redirect(url_for('bookList'))
 
 #asdasd
 @app.route('/report')

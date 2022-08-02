@@ -10,6 +10,7 @@ class ModelGenre():
             name = genre.name
             cursor.execute("INSERT INTO genero VALUES (%s,%s)", (id, name))
             conn.commit()
+            conn.close()
         except Exception as ex:
             raise Exception(ex)
     
@@ -42,6 +43,7 @@ class ModelGenre():
         SET Gen_Nombre = %s
         WHERE Gen_Id = %s """, (name, id))
         conn.commit()
+        conn.close()
     
     @classmethod
     def delete_genre(self, db, id):
@@ -50,6 +52,7 @@ class ModelGenre():
         sql = """DELETE FROM genero WHERE Gen_id = {}""".format(id)
         cur.execute(sql)
         conn.commit()
+        conn.close()
 
     @classmethod
     def search_genre(sef, db, searchGenreCondition):

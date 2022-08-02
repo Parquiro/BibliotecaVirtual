@@ -23,7 +23,7 @@ Bienvenido a la sección donde se encuentra el listado de libros registrados, po
     </div>
 </div>
 <div class="container-fluid" style="margin: 0 0 0 0;">
-    <form action="/searchUsers" method = "POST" class="pull-right" style="width: 30% !important;" autocomplete="off">
+    <form action="/searchBooks" method = "POST" class="pull-right" style="width: 30% !important;" autocomplete="off">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="group-material">
             <input type="search" style="display: inline-block !important; width: 70%;" class="material-control tooltips-general" name="searchCondition" placeholder="Buscar libros" pattern="[a-zA-ZáéíóúÁÉÍÓÚ 0-9 ]{1,50}" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe un dato">
