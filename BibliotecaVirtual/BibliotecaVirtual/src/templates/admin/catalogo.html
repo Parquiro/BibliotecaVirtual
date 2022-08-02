@@ -36,6 +36,7 @@
             </a>
         </div>
         <div class="media-body">
+            {% for book in catalog %}
             <h4 class="media-heading">1 - Título</h4>
             <div class="pull-left">
                 <strong>Autor<br>
@@ -44,6 +45,7 @@
             <p class="text-center pull-right">
                 <a href="#!" class="btn btn-info btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-info-outline"></i> &nbsp;&nbsp; Más información</a>
             </p>
+            {% endfor %}
         </div>
     </div>
 

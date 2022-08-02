@@ -11,12 +11,14 @@ from models.ModelUser import ModelUser
 from models.ModelAuthor import ModelAuthor
 from models.ModelGenre import ModelGenre
 from models.ModelBook import ModelBook
+from models.ModelCatalog import ModelCatalog
 
 #Entities
 from models.entities.User import User
 from models.entities.Author import Author
 from models.entities.Genre import Genre
 from models.entities.Book import Book
+from models.entities.Catalog import Catalog
 
 app = Flask(__name__)
 app.secret_key = 'mySecretKey'
