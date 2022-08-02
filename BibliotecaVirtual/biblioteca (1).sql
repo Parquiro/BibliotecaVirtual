@@ -94,7 +94,8 @@ CREATE TABLE `usuario` (
   `Usu_Apellido` varchar(15) NOT NULL,
   `Usu_Email` varchar(30) NOT NULL,
   `Usu_Password` varchar(300) NOT NULL,
-  `Usu_Telefono` varchar(15) DEFAULT NULL
+  `Usu_Telefono` varchar(15) DEFAULT NULL,
+  `Usu_Admin` bit NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Entidad de usuarios.';
 
 --
@@ -142,7 +143,8 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`Usu_Id`),
   ADD UNIQUE KEY `Usu_Dni` (`Usu_Dni`),
   ADD UNIQUE KEY `Usu_Email` (`Usu_Email`),
-  ADD KEY `Usu_Password` (`Usu_Password`);
+  ADD KEY `Usu_Password` (`Usu_Password`),
+  ADD KEY `Usu_Admin` (`Usu_Admin`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
