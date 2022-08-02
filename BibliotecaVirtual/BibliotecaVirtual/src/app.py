@@ -233,6 +233,11 @@ def delete_genre(id):
     flash('--- Genero eliminado correctamente ---')
     return redirect(url_for('genreList'))
 
+@app.route('/catalog', methods=['GET', 'POST'])
+def catalog():
+    data = ModelCatalog().catalog(db)
+    return render_template('admin/catalogo.html', books = data)
+
 #asdasd
 @app.route('/report')
 def download_report():
