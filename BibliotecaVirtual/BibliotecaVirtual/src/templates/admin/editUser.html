@@ -1,0 +1,85 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Listado de usuarios{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/user03.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la seccion donde puedes editar usuarios, edita el campo
+            a actualizar y presiona guardar para guardar los cambios
+{% endblock %}
+
+{{ administrativePanel }}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li><a href="/registerUser">Nuevo usuario</a></li>
+                <li><a href="/userList">Listado de usuarios</a></li>
+                <li class="active">Editar usuario</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<form action="/updateUser/{{userEdit.0}}" method="POST" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="group-material-double">
+                
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" name="name" value="{{ userEdit.2 }}"
+                        required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip"
+                        data-placement="top" title="Escribe el nombre del usuario" placeholder="Escribe aquí el nombre del usuario" > 
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Nombre</label>
+                </div>
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" name="lastname" placeholder="Escribe aquí el apellido del usuario" 
+                        value="{{ userEdit.3 }}" required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}"
+                        data-toggle="tooltip" data-placement="top" title="Escribe el Apellido del Estudiante">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Apellido</label>
+                </div>
+            </div>
+            <div class="group-material">
+                <input type="email" class="material-control tooltips-general" name="username" value="{{ userEdit.4 }}"
+                    required="" maxlength="50" data-toggle="tooltip" data-placement="top" placeholder="Escribe aquí el email del usuario" 
+                    title="Escribe el Email del Estudiante">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Email</label>
+            </div>
+            <div class="group-material-double">
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí el dni del usuario" 
+                    pattern="^[0-9]{1,8}" required="" maxlength="8" data-toggle="tooltip" data-placement="top" 
+                    title="Solamente 8 números" name="dni" value="{{ userEdit.1 }}">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Dni</label>
+                </div>
+                <div class="group-material">
+                    <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí el telefono del usuario" 
+                        required="" maxlength="15" pattern="[0-9]{1,15}" data-toggle="tooltip" data-placement="top"
+                        title="Escribe el Telefono del usuario" name="phone" value="{{ userEdit.5 }}">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Telefono</label>
+                </div>
+            </div>
+            <p class="text-center">
+                <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i>
+                    &nbsp;&nbsp; Limpiar</button>
+                <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp;
+                    Guardar</button>
+            </p>
+        </div>
+    </div>
+</form>
+{% endblock %}

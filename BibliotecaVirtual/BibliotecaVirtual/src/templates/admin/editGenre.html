@@ -1,0 +1,50 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Editar genero{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/flat-book.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la seccion donde puedes editar generos, edita el campo
+            a actualizar y presiona guardar para guardar los cambios
+{% endblock %}
+
+{{ administrativePanel }}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+                <li><a href="/addGenre">Nuevo autor</a></li>
+                <li><a href="/genreList">Listado de autores</a></li>
+                <li class="active">Editar autor</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<form action="/updateGenre/{{genreEdit.0}}" method="POST" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+          
+            <div class="group-material">
+                <input type="text" class="material-control tooltips-general" name="genreName" value="{{ genreEdit.1 }}"
+                    required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip"
+                    data-placement="top" title="Escribe el nombre del genero" placeholder="Escribe aquí el nombre del genero" > 
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Nombre</label>
+            </div>
+
+            <p class="text-center">
+                <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i>
+                    &nbsp;&nbsp; Limpiar</button>
+                <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp;
+                    Guardar</button>
+            </p>
+        </div>
+    </div>
+</form>
+{% endblock %}

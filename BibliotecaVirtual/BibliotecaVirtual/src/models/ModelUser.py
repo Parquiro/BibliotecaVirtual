@@ -1,4 +1,3 @@
-from colorama import Cursor
 from .entities.User import User
 from werkzeug.security import generate_password_hash
 
@@ -38,7 +37,8 @@ class ModelUser():
     def register_user(self, db, user):
         try:
             conn = db.connection
-            id = "coalcase(select max(usuario.id) from usuario, 0) + 1"
+            #id = "coalcase(select max(usuario.id) from usuario, 0) + 1"
+            id = None
             dni = user.dni
             name = user.name
             lastname = user.lastname
@@ -50,3 +50,74 @@ class ModelUser():
             conn.commit()
         except Exception as ex:
             raise Exception(ex)
+    
+    @classmethod
+    def list_users(self, db):
+        cur = db.connection.cursor()
+        sql = """SELECT Usu_Id, Usu_Nombre, Usu_Apellido, Usu_Dni, Usu_Email, Usu_Telefono
+        FROM usuario"""
+        cur.execute(sql)
+        data = cur.fetchall()
+        return data
+    
+    @classmethod
+    def delete_user(self, db, id):
+        conn = db.connection
+        cur = conn.cursor()
+        sql = """DELETE FROM usuario WHERE Usu_id = {}""".format(id)
+        cur.execute(sql)
+        conn.commit()
+    
+    @classmethod
+    def get_user_byID(self, db, id):
+        conn = db.connection
+        cur = conn.cursor()
+        sql = """SELECT Usu_Id, Usu_Dni, Usu_Nombre, Usu_Apellido, Usu_Email, Usu_Telefono FROM usuario WHERE Usu_Id = {}""".format(id)
+        cur.execute(sql)
+        data = cur.fetchone()
+        return data
+
+    @classmethod
+    def update_user(self, db, id, user):
+        dni = user.dni
+        name = user.name
+        lastname = user.lastname
+        username = user.username
+        phone = user.phone
+        conn = db.connection
+        cur = conn.cursor()
+        cur.execute("""
+        UPDATE usuario
+        SET Usu_Dni = %s,
+            Usu_Nombre = %s,
+            Usu_Apellido = %s,
+            Usu_Email = %s, 
+            Usu_Telefono = %s
+        WHERE Usu_Id = %s """, (dni, name, lastname, username, phone, id))
+        conn.commit()
+
+    @classmethod
+    def count_users(self, db):
+        cur = db.connection.cursor()
+        sql = """SELECT COUNT(*) AS 'cantidad de usuarios'
+        FROM usuario"""
+        cur.execute(sql)
+        data = cur.fetchone()
+        return data
+    
+    @classmethod
+    def search_user(sef, db, searchUserCondition):
+        searchCondition = "%"+ searchUserCondition + "%"
+        cur = db.connection.cursor()
+        cur.execute("""
+        SELECT Usu_Id, Usu_Nombre, Usu_Apellido, Usu_Dni, Usu_Email, Usu_Telefono
+        FROM usuario
+        WHERE Usu_Nombre like %s
+            or Usu_Apellido like %s
+            or Usu_Dni like %s
+            or Usu_Telefono like %s """, (searchCondition, searchCondition, searchCondition,searchCondition))
+        data = cur.fetchall()
+        return data
+        
+        
+

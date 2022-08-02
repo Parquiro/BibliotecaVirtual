@@ -1,0 +1,101 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Registro de Usuarios{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/user03.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la sección para registrar nuevos estudiantes, para poder registrar un estudiante deberás de llenar todos los campos del siguiente formulario
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+              <li class="active">Nuevo usuario</li>
+              <li><a href="/userList">Listado de usuarios</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="container-flat-form">
+        <div class="title-flat-form title-flat-blue">Registrar un nuevo usuario</div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="text-center" style="margin-bottom: 30px;" role="alert">
+            <strong>--- {{ message }} ---</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/registerUser" method="POST" autocomplete="off" >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="row">
+               <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                   
+                <div class="group-material-double">
+                
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="name"
+                            required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}" data-toggle="tooltip"
+                            data-placement="top" title="Escribe el nombre del usuario" placeholder="Escribe aquí el nombre del usuario" > 
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Nombre</label>
+                    </div>
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="lastname" placeholder="Escribe aquí el apellido del usuario" 
+                            required="" maxlength="15" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,15}"
+                            data-toggle="tooltip" data-placement="top" title="Escribe el Apellido del Estudiante">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Apellido</label>
+                    </div>
+                </div>
+                <div class="group-material">
+                    <input type="email" class="material-control tooltips-general" name="username"
+                        required="" maxlength="50" data-toggle="tooltip" data-placement="top" placeholder="Escribe aquí el email del usuario" 
+                        title="Escribe el Email del Estudiante">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Email</label>
+                </div>
+                <div class="group-material-double">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí el dni del usuario" 
+                        pattern="^[0-9]{1,8}" required="" maxlength="8" data-toggle="tooltip" data-placement="top" 
+                        title="Solamente 8 números" name="dni"">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Dni</label>
+                    </div>
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí el telefono del usuario" 
+                            required="" maxlength="15" pattern="[0-9]{1,15}" data-toggle="tooltip" data-placement="top"
+                            title="Escribe el Telefono del usuario" name="phone"">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Telefono</label>
+                    </div>
+                </div>
+                    <div class="group-material">
+                        <input type="password" class="material-control tooltips-general" name="password" required="" maxlength="16" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Contraseña</label>
+                    </div>
+                    <p class="text-center">
+                        <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                    </p> 
+               </div>
+           </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Registro de genero{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+{% block descriptionImage %}{{ url_for('static', filename='assets/img/flat-book.png') }}{% endblock %}
+
+{% block description %}
+Bienvenido a la sección para registrar un nuevo genero de libros, debes de llenar el siguiente formulario para registrar un nuevo genero
+{% endblock %}
+
+{{ administrativePanel }}
+ 
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 lead">
+            <ol class="breadcrumb">
+              <li class="active">Nuevo genero</li>
+              <li><a href="/genreList">Lista de generos</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="container-flat-form">
+        <div class="title-flat-form title-flat-blue">Agregar un nuevo genero</div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="text-center" style="margin-bottom: 30px;" role="alert">
+            <strong>--- {{ message }} ---</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/addGenre" method="POST" autocomplete="off">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="row">
+               <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="genreName" placeholder="Escribe aquí el nombre del genero"  required="" pattern="[a-zA-z-áéíóúÁÉÍÓÚñÑ ]{1,15}" maxlength="15" data-toggle="tooltip" data-placement="top" title="Solo números, máximo 15 caracteres">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Nombre</label>
+                    </div>
+                    <p class="text-center">
+                        <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                    </p> 
+               </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
