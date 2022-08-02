@@ -68,7 +68,7 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/adminHome')
-#@login_required
+@login_required
 def adminHome():
     users = ModelUser.count_users(db)
     authors = ModelAuthor.count_authors(db)
@@ -77,7 +77,7 @@ def adminHome():
     countGenres = genres)
 
 @app.route('/registerUser', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def registerUser():
     if request.method == 'POST':
         user = User(None, request.form['dni'], request.form['name'], request.form['lastname'],
@@ -123,7 +123,7 @@ def addBook():
     return redirect(url_for('addBook'))
 
 @app.route('/userList', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def userList():
     data = ModelUser.list_users(db)
     return render_template('admin/userList.html', users = data)
@@ -162,25 +162,25 @@ def searchGenres():
     return render_template('admin/genreList.html', genres = data)
 
 @app.route('/editUser/<string:id>')
-#@login_required
+@login_required
 def editUser(id):
     data = ModelUser.get_user_byID(db, id)
     return render_template('admin/editUser.html', userEdit = data)
 
 @app.route('/editAuthor/<string:id>')
-#@login_required
+@login_required
 def editAuthor(id):
     data = ModelAuthor.get_author_byID(db, id)
     return render_template('admin/editAuthor.html', authorEdit = data)
 
 @app.route('/editGenre/<string:id>')
-#@login_required
+@login_required
 def editGenre(id):
     data = ModelGenre.get_genre_byID(db, id)
     return render_template('admin/editGenre.html', genreEdit = data)
 
 @app.route('/editBook/<string:id>')
-#@login_required
+@login_required
 def editBook(id):
     bookEdit = ModelBook.get_book_byID(db, id)
     print(bookEdit)
@@ -211,21 +211,21 @@ def updateGenre(id):
     return redirect(url_for('genreList'))
 
 @app.route('/deleteUser/<string:id>', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def delete_user(id):
     data = ModelUser.delete_user(db, id)
     flash('--- Usuario eliminado correctamente ---')
     return redirect(url_for('userList'))
 
 @app.route('/deleteAuthor/<string:id>', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def delete_author(id):
     data = ModelAuthor.delete_author(db, id)
     flash('--- Autor eliminado correctamente ---')
     return redirect(url_for('authorList'))
 
 @app.route('/deleteGenre/<string:id>', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def delete_genre(id):
     data = ModelGenre.delete_genre(db, id)
     flash('--- Genero eliminado correctamente ---')
