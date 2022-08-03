@@ -270,6 +270,10 @@ def genreFilter(id):
     print(dataBooks)
     return render_template('common/catalog.html', books = dataBooks, genres = dataGenre)
 
+@app.route('/advancedSettings', methods=['GET','POST'])
+def advancedSettings():
+    return render_template('/common/advancesettings.html')
+
 
 #asdasd
 @app.route('/report')
