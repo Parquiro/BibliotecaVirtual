@@ -38,7 +38,8 @@
                     <strong>{{ book.6 }}<br>
                 </div>
                 <p class="text-center pull-right">
-                    <a href="/addFavorite" class="btn btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-favorite-outline"></i></a>
+                    <a href="/addFavorite/{{ current_user.id }}/{{ book.0 }}" class="btn btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-favorite-outline"></i></a>
+                    {% if fa %}
                     <a href="#!" class="btn btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-favorite"></i></a>
                     <a href="#!" class="btn btn-info btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-info-outline"></i> &nbsp;&nbsp; Más información</a>
                 </p>

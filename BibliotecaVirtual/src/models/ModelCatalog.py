@@ -19,3 +19,4 @@ class ModelCatalog():
         cur.execute(sql)
         data = cur.fetchall()
         return data
+

@@ -12,6 +12,7 @@ from models.ModelAuthor import ModelAuthor
 from models.ModelGenre import ModelGenre
 from models.ModelBook import ModelBook
 from models.ModelCatalog import ModelCatalog
+from models.ModelFavorite import ModelFavorite
 
 #Entities
 from models.entities.User import User
@@ -191,7 +192,6 @@ def editGenre(id):
 #@login_required
 def editBook(id):
     bookEdit = ModelBook.get_book_byID(db, id)
-    print(bookEdit)
     genre = ModelGenre().list_genre(db)
     author = ModelAuthor().list_authors(db)
     return render_template('admin/editBook.html', bookEdit = bookEdit, genres = genre, authors = author)
@@ -248,28 +248,35 @@ def delete_genre(id):
     flash('--- Genero eliminado correctamente ---')
     return redirect(url_for('genreList'))
 
-@app.route('/deleteBook/<string:id>', methods=['GET', 'POST'])
+@app.route('/deleteBook/<id>', methods=['GET', 'POST'])
 #@login_required
 def delete_book(id):
     data = ModelBook.delete_book(db, id)
     flash('--- Libro eliminado correctamente ---')
     return redirect(url_for('bookList'))
 
-@app.route('/catalog', methods=['GET', 'POST'])
+@app.route('/catalog/<idUser>', methods=['GET', 'POST'])
 #@login_required
-def show_catalog():
+def catalog(idUser):
     dataBooks = ModelBook.list_book(db)
     dataGenre = ModelGenre.list_genre(db)
-    print(dataBooks)
-    return render_template('common/catalog.html', books = dataBooks, genres = dataGenre)
+    favorie = ModelFavorite.check_favorites(db, idUser)
+    return render_template('common/catalog.html', books = dataBooks, genres = dataGenre, users = favorite)
 
-@app.route('/genreFilter/<id>', methods=['GET', 'POST'])
+@app.route('/genreFilter/<string:id>', methods=['GET', 'POST'])
 def genreFilter(id):
     dataBooks = ModelCatalog.filter_by_genre(db, id)
     dataGenre = ModelGenre.list_genre(db)
     dataAuthor = ModelAuthor().list_authors(db)
-    print(dataBooks)
     return render_template('common/catalog.html', books = dataBooks, genres = dataGenre, authors = dataAuthor)
+
+@app.route('/addFavorite/<idUser>/<idBook>', methods=['GET', 'POST'])
+def addFavorite(idUser, idBook):
+    user = idUser
+    book = idBook
+    ModelFavorite.add_favorite(db, user, book)
+    print(user, book)
+    return redirect(url_for('catalog'))
 
 
 #asdasd
