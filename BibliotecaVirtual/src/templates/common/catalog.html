@@ -28,7 +28,6 @@
     <div class="container-fluid">
         <div class="media media-hover">
             <div class="media-left media-middle">
-                <a href="#!" class="tooltips-general" data-toggle="tooltip" data-placement="right" title="Más información del libro">
                 <img class="media-object" src="{{ url_for('static', filename='assets/img/book.png') }}" alt="Libro" width="48" height="48">
                 </a>
             </div>
@@ -39,11 +38,13 @@
                     <strong>{{ book.6 }}<br>
                 </div>
                 <p class="text-center pull-right">
+                    
+                    
                     <a href="/addFavorite/{{ current_user.id }}/{{ book.0 }}" class="btn btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-favorite-outline"></i></a>
-                    {% if fa %}
+                    
+                   
                     <a href="#!" class="btn btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-favorite"></i></a>
                     <a href="#!" class="btn btn-info btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-info-outline"></i> &nbsp;&nbsp; Más información</a>
-                    {% endif %}
                 </p>
             </div>
         </div>
