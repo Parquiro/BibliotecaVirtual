@@ -279,6 +279,12 @@ span.label-mhover{
     grid-template-columns: 1fr 1fr;
     column-gap: 50px;
 }
+.group-material-double-catalog {
+    position: relative;
+    display: flex;
+    column-gap: 50px;
+    padding: 0 3%;
+}
 input.material-control,
 select.material-control{
   font-size:16px;

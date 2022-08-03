@@ -267,8 +267,9 @@ def show_catalog():
 def genreFilter(id):
     dataBooks = ModelCatalog.filter_by_genre(db, id)
     dataGenre = ModelGenre.list_genre(db)
+    dataAuthor = ModelAuthor().list_authors(db)
     print(dataBooks)
-    return render_template('common/catalog.html', books = dataBooks, genres = dataGenre)
+    return render_template('common/catalog.html', books = dataBooks, genres = dataGenre, authors = dataAuthor)
 
 
 #asdasd
