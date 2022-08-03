@@ -260,7 +260,7 @@ def delete_book(id):
 def catalog(idUser):
     dataBooks = ModelBook.list_book(db)
     dataGenre = ModelGenre.list_genre(db)
-    favorie = ModelFavorite.check_favorites(db, idUser)
+    favorite = ModelFavorite.check_favorites(db, idUser)
     return render_template('common/catalog.html', books = dataBooks, genres = dataGenre, users = favorite)
 
 @app.route('/genreFilter/<string:id>', methods=['GET', 'POST'])
@@ -276,7 +276,7 @@ def addFavorite(idUser, idBook):
     book = idBook
     ModelFavorite.add_favorite(db, user, book)
     print(user, book)
-    return redirect(url_for('catalog'))
+    return redirect(url_for('catalog', idUser = idUser))
 
 
 #asdasd
