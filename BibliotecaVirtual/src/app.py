@@ -254,6 +254,13 @@ def delete_book(id):
     flash('--- Libro eliminado correctamente ---')
     return redirect(url_for('bookList'))
 
+@app.route('/catalog', methods=['GET', 'POST'])
+#@login_required
+def show_catalog():
+    dataBooks = ModelBook.list_book(db)
+    dataGenre = ModelGenre.list_genre(db)
+    return render_template('common/catalog.html', books = dataBooks, genres = dataGenre)
+
 #asdasd
 @app.route('/report')
 def download_report():
