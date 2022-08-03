@@ -42,7 +42,7 @@ Bienvenido a la sección donde se encuentra el listado de libros registrados, po
                     <div class="group-material">
                         <span>Genero</span>
                         <select class="tooltips-general material-control" name="bookGenre" data-toggle="tooltip" data-placement="top" title="Elige la categoría del libro">
-                            <option value="{{ bookEdit.2 }}"  selected="">{{ bookEdit.2 }}</option>
+                            <option value="{{ bookEdit.2 }}"  selected="">{{ bookEdit.3 }}</option>
                             {% for genre in genres %}
                             {% if genre.0 != bookEdit.2 %}
                             <option value="{{ genre.0 }}">{{ genre.1 }}</option>
@@ -53,23 +53,23 @@ Bienvenido a la sección donde se encuentra el listado de libros registrados, po
                     <div class="group-material">
                         <span>Autor</span>
                         <select class="tooltips-general material-control" name="bookAuthor" data-toggle="tooltip" data-placement="top" title="Elige un Autor">
-                            <option value="{{ bookEdit.3 }}" selected="">{{ bookEdit.3 }}</option>
+                            <option value="{{ bookEdit.4 }}" selected="">{{ bookEdit.5 }} {{ bookEdit.6 }}</option>
                             {% for author in authors %}
-                            {% if author.0 != bookEdit.3 %}
-                            <option value="{{ author.0 }}">{{ author.1 }}</option>
+                            {% if author.0 != bookEdit.4 %}
+                            <option value="{{ author.0 }}">{{ author.1 }} {{ author.2 }}</option>
                             {% endif %}
                             {% endfor %}
                         </select>
                     </div>
                 </div>
                 <div class="group-material">
-                    <input type="text" class="material-control tooltips-general" name="bookDescription" value="{{ bookEdit.4 }}" placeholder="Escribe aquí la descripcion del libro" required="" maxlength="300" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
+                    <input type="text" class="material-control tooltips-general" name="bookDescription" value="{{ bookEdit.7 }}" placeholder="Escribe aquí la descripcion del libro" required="" maxlength="300" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Descripcion</label>
                 </div>
                 <div class="group-material">
-                    <input type="text" class="material-control tooltips-general" name="bookUrl" value="{{ bookEdit.5 }}" placeholder="Pega aqui el link del libro" required="" maxlength="300" data-toggle="tooltip" data-placement="top" title="Link del libro">
+                    <input type="text" class="material-control tooltips-general" name="bookUrl" value="{{ bookEdit.8 }}" placeholder="Pega aqui el link del libro" required="" maxlength="300" data-toggle="tooltip" data-placement="top" title="Link del libro">
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Link</label>
@@ -77,20 +77,20 @@ Bienvenido a la sección donde se encuentra el listado de libros registrados, po
                 <legend><strong>Otros datos</strong></legend><br>
 
                 <div class="group-material">
-                    <input type="text" class="material-control tooltips-general" name="bookEditorial" value="{{ bookEdit.6 }}" placeholder="Escribe aquí la editorial del libro" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
+                    <input type="text" class="material-control tooltips-general" name="bookEditorial" value="{{ bookEdit.9 }}" placeholder="Escribe aquí la editorial del libro" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Editorial del libro">
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Editorial</label>
                 </div>
                 <div class="group-material-double">
                     <div class="group-material">
-                        <input type="date" class="material-control tooltips-general" name="bookDate" value="{{ bookEdit.7 }}" placeholder="Escribe aquí el año del libro" required="" pattern="[0-9]{1,4}" maxlength="4" data-toggle="tooltip" data-placement="top" title="Solamente números, sin espacios">
+                        <input type="date" class="material-control tooltips-general" name="bookDate" value="{{ bookEdit.10 }}" placeholder="Escribe aquí el año del libro" required="" pattern="[0-9]{1,4}" maxlength="4" data-toggle="tooltip" data-placement="top" title="Solamente números, sin espacios">
                          <span class="highlight"></span>
                          <span class="bar"></span>
                          <label>Año</label>
                     </div>
                     <div class="group-material">
-                        <input type="number" class="material-control tooltips-general" name="bookPages" value="{{ bookEdit.8 }}" placeholder="Escribe aquí el numero de paginas del libro" required="" min="0" max="9999999" data-toggle="tooltip" data-placement="top" title="Edición del libro">
+                        <input type="number" class="material-control tooltips-general" name="bookPages" value="{{ bookEdit.11 }}" placeholder="Escribe aquí el numero de paginas del libro" required="" min="0" max="9999999" data-toggle="tooltip" data-placement="top" title="Edición del libro">
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Numero de Paginas</label>

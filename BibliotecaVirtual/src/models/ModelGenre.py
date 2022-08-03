@@ -21,7 +21,6 @@ class ModelGenre():
         FROM genero"""
         cur.execute(sql)
         data = cur.fetchall()
-        print(data)
         return data
 
     @classmethod

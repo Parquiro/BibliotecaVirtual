@@ -25,8 +25,16 @@ class ModelBook():
     @classmethod
     def list_book(self, db):
         cur = db.connection.cursor()
-        sql = """SELECT Lib_Id, Lib_Nombre, Lib_IdAutor, Lib_IdGenero, Lib_Editorial, Lib_FPublicacion, Lib_Url
-        FROM libro"""
+        sql = """
+        SELECT 
+            libro.Lib_Id, libro.Lib_Nombre, autor.Aut_Nombre, 
+            autor.Aut_Apellido, genero.Gen_Nombre, libro.Lib_Editorial,
+            libro.Lib_FPublicacion, libro.Lib_Url 
+        FROM libro
+        INNER JOIN autor ON
+            libro.Lib_IdAutor = autor.Aut_Id   
+        INNER JOIN genero ON
+            libro.Lib_IdGenero = genero.Gen_Id """
         cur.execute(sql)
         data = cur.fetchall()
         return data
@@ -35,13 +43,17 @@ class ModelBook():
     def get_book_byID(self, db, id):
         cur = db.connection.cursor()
         sql = """
-        SELECT Lib_Id, 
-            Lib_Nombre,  Lib_IdGenero,
-            Lib_IdAutor, Lib_Descripcion,
-            Lib_Url, Lib_Editorial,
-            Lib_FPublicacion, Lib_NroPaginas
+        SELECT 
+            libro.Lib_Id, libro.Lib_Nombre, libro.Lib_IdGenero, genero.Gen_Nombre, 
+            libro.Lib_IdAutor, autor.Aut_Nombre, autor.Aut_Apellido, libro.Lib_Descripcion,
+            libro.Lib_Url, libro.Lib_Editorial,
+            libro.Lib_FPublicacion, libro.Lib_NroPaginas
         FROM libro
-        WHERE Lib_Id = {}""".format(id)
+        INNER JOIN autor ON
+            libro.Lib_IdAutor = autor.Aut_Id   
+        INNER JOIN genero ON
+            libro.Lib_IdGenero = genero.Gen_Id 
+        WHERE libro.Lib_Id = {} """.format(id)
         cur.execute(sql)
         data = cur.fetchone()
         return data
@@ -82,8 +94,16 @@ class ModelBook():
         searchCondition = "%"+ searchBookCondition +"%"
         conn = db.connection
         cur = conn.cursor()
-        cur.execute("""SELECT Lib_Id, Lib_Nombre, Lib_IdAutor, Lib_IdGenero, Lib_Editorial, Lib_FPublicacion, Lib_Url
+        cur.execute("""
+        SELECT 
+            libro.Lib_Id, libro.Lib_Nombre, autor.Aut_Nombre, 
+            autor.Aut_Apellido, genero.Gen_Nombre, libro.Lib_Editorial,
+            libro.Lib_FPublicacion, libro.Lib_Url 
         FROM libro
+        INNER JOIN autor ON
+            libro.Lib_IdAutor = autor.Aut_Id   
+        INNER JOIN genero ON
+            libro.Lib_IdGenero = genero.Gen_Id
         WHERE Lib_Nombre like %s
         or Lib_Editorial like %s """, (searchCondition, searchCondition))
         data = cur.fetchall()

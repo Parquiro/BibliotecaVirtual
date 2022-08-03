@@ -23,7 +23,6 @@ class ModelAuthor():
         FROM autor"""
         cur.execute(sql)
         data = cur.fetchall()
-        print(data)
         return data
     
     @classmethod

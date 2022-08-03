@@ -64,11 +64,15 @@ Bienvenido a la sección donde se encuentra el listado de libros registrados, po
                 <tr class="div-table-row div-table-row-list">
                     <td class="div-table-cell" style="width: 3%;">#</td>
                     <td class="div-table-cell" style="width: 14%;">{{ book.1 }}</td>
-                    <td class="div-table-cell" style="width: 16%;">{{ book.2 }}</td>
-                    <td class="div-table-cell" style="width: 9%;">{{ book.3 }}</td>
-                    <td class="div-table-cell" style="width: 16%;" >{{ book.4 }}</td>
-                    <td class="div-table-cell" style="width: 9%;">{{ book.5 }}</td>
-                    <td class="div-table-cell" style="width: 6%;">{{ book.6 }}</td>
+                    <td class="div-table-cell" style="width: 16%;">{{ book.2 }} {{ book.3 }}</td>
+                    <td class="div-table-cell" style="width: 9%;">{{ book.4 }}</td>
+                    <td class="div-table-cell" style="width: 16%;" >{{ book.5 }}</td>
+                    <td class="div-table-cell" style="width: 9%;">{{ book.6 }}</td>
+                    <td class="div-table-cell" style="width: 6%;">
+                        <a href="{{ book.7 }}" target="_blank" rel="noopener noreferrer" class="btn">
+                            <i class="zmdi zmdi-book zmdi-hc-3x"></i>
+                        </a>
+                    </td>
                     <td class="div-table-cell" style="width: 6%;">
                         <a href="/editBook/{{book.0}}" class="btn btn-success"><i class="zmdi zmdi-refresh"></i></a>
                     </td>
