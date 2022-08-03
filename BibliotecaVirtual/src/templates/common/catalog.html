@@ -18,7 +18,7 @@
     <h2 class="text-center" style="margin: 0 0 25px 0;">Generos</h2>
     <ul class="list-unstyled text-center list-catalog-container">
         {% for genre in genres %}
-        <li class="list-catalog">{{ genre.1 }}</li>
+        <a href="/genreFilter/{{ genre.0 }}" class="list-catalog">{{ genre.1 }}</a>
         {% endfor %}
     </ul>
 </div>
