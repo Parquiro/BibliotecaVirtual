@@ -11,6 +11,7 @@ from models.ModelUser import ModelUser
 from models.ModelAuthor import ModelAuthor
 from models.ModelGenre import ModelGenre
 from models.ModelBook import ModelBook
+from models.ModelCatalog import ModelCatalog
 
 #Entities
 from models.entities.User import User
@@ -259,7 +260,16 @@ def delete_book(id):
 def show_catalog():
     dataBooks = ModelBook.list_book(db)
     dataGenre = ModelGenre.list_genre(db)
+    print(dataBooks)
     return render_template('common/catalog.html', books = dataBooks, genres = dataGenre)
+
+@app.route('/genreFilter/<id>', methods=['GET', 'POST'])
+def genreFilter(id):
+    dataBooks = ModelCatalog.filter_by_genre(db, id)
+    dataGenre = ModelGenre.list_genre(db)
+    print(dataBooks)
+    return render_template('common/catalog.html', books = dataBooks, genres = dataGenre)
+
 
 #asdasd
 @app.route('/report')
