@@ -61,14 +61,12 @@
                     <li>
                         <div class="dropdown-menu-button"><i class="zmdi zmdi-account-box zmdi-hc-fw"></i>&nbsp;&nbsp; Gestion de usuarios <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw"></i></div>
                         <ul class="list-unstyled">
-                            <li><a href="#"><i class="zmdi zmdi-face zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo administrador</a></li>
-                            <li><a href="#"><i class="zmdi zmdi-accounts zmdi-hc-fw"></i>&nbsp;&nbsp; Lista de administradores</a></li>
                             <li><a href="/registerUser"><i class="zmdi zmdi-account-add zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo usuario</a></li>
                             <li><a href="/userList"><i class="zmdi zmdi-accounts zmdi-hc-fw"></i>&nbsp;&nbsp; Lista de usuarios</a></li>
                         </ul>
                     </li>
  
-                    <li><a href="/catalog"><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp; Catálogo</a></li>
+                    <li><a href="/catalog/{{ current_user.id }}"><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp; Catálogo</a></li>
 
                     <li><a href="/advancedSettings"><i class="zmdi zmdi-wrench zmdi-hc-fw"></i>&nbsp;&nbsp; Configuraciones avanzadas</a></li>
                 </ul>

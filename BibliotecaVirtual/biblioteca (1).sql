@@ -125,7 +125,7 @@ ALTER TABLE `genero`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`Lib_Id`),
-  ADD UNIQUE KEY `Lib_IdAutor` (`Lib_IdAutor`),
+  ADD KEY `Lib_IdAutor` (`Lib_IdAutor`),
   ADD KEY `Lib_Nombre` (`Lib_Nombre`),
   ADD KEY `FK_libro_genero` (`Lib_IdGenero`);
 
@@ -133,8 +133,8 @@ ALTER TABLE `libro`
 -- Indices de la tabla `librofavorito`
 --
 ALTER TABLE `librofavorito`
-  ADD UNIQUE KEY `Id_Libro` (`Id_Libro`),
-  ADD UNIQUE KEY `Dni_Usuario` (`Id_Usuario`) USING BTREE;
+  ADD KEY `Id_Libro` (`Id_Libro`),
+  ADD KEY `Dni_Usuario` (`Id_Usuario`) USING BTREE;
 
 --
 -- Indices de la tabla `usuario`
