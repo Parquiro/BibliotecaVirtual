@@ -1,0 +1,47 @@
+{% extends 'adminLayout.html' %}
+
+{% block title %}Catalogo{% endblock %}
+{% block tittleIndex %}Panel administrativo{% endblock %}
+
+{% block body %}
+<div class="container-fluid"  style="margin-top: -10%;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="pdf" class="img-responsive center-box" style="max-width: 110px;">
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
+            Bienvenido al catálogo, selecciona un genero de la lista para empezar, si deseas buscar un libro por nombre o título has click en el icono &nbsp; <i class="zmdi zmdi-search"></i> &nbsp; que se encuentra en la barra superior
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="margin: 0 0 50px 0;">
+    <h2 class="text-center" style="margin: 0 0 25px 0;">Generos</h2>
+    <ul class="list-unstyled text-center list-catalog-container">
+        {% for genre in genres %}
+        <li class="list-catalog">{{ genre.1 }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% for book in books %}
+    <div class="container-fluid">
+        <div class="media media-hover">
+            <div class="media-left media-middle">
+                <a href="#!" class="tooltips-general" data-toggle="tooltip" data-placement="right" title="Más información del libro">
+                <img class="media-object" src="{{ url_for('static', filename='assets/img/book.png') }}" alt="Libro" width="48" height="48">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{ book.1 }}</h4>
+                <div class="pull-left">
+                    <strong>{{ book.2 }} {{ book.3 }}<br>
+                    <strong>{{ book.6 }}<br>
+                </div>
+                <p class="text-center pull-right">
+                    <a href="#!" class="btn btn-info btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-info-outline"></i> &nbsp;&nbsp; Más información</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
+

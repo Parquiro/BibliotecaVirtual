@@ -12,6 +12,7 @@ class ModelAuthor():
             lastname = author.lastname
             cursor.execute("INSERT INTO autor VALUES (%s,%s,%s)", (id, name, lastname))
             conn.commit()
+            conn.close()
         except Exception as ex:
             raise Exception(ex)
     
@@ -22,7 +23,6 @@ class ModelAuthor():
         FROM autor"""
         cur.execute(sql)
         data = cur.fetchall()
-        print(data)
         return data
     
     @classmethod
@@ -46,6 +46,7 @@ class ModelAuthor():
             Aut_Apellido = %s
         WHERE Aut_Id = %s """, (name, lastname, id))
         conn.commit()
+        conn.close()
     
     @classmethod
     def delete_author(self, db, id):
@@ -54,6 +55,7 @@ class ModelAuthor():
         sql = """DELETE FROM autor WHERE Aut_id = {}""".format(id)
         cur.execute(sql)
         conn.commit()
+        conn.close()
 
     @classmethod
     def search_author(sef, db, searchAuthorCondition):
